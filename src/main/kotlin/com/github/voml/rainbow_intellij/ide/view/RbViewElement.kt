@@ -1,10 +1,8 @@
 package com.github.voml.rainbow_intellij.ide.view
 
 import com.github.voml.rainbow_intellij.file.RainbowFile
-import com.github.voml.rainbow_intellij.language.psi_node.RainAttributeStatementNode
-import com.github.voml.rainbow_intellij.language.psi_node.RainGlobalStatementNode
-import com.github.voml.rainbow_intellij.language.psi_node.RainMetaStatementNode
-import com.github.voml.rainbow_intellij.language.psi_node.RainSchemaStatementNode
+import com.github.voml.rainbow_intellij.language.psi.RainLanguageStatement
+import com.github.voml.rainbow_intellij.language.psi_node.*
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement
@@ -46,16 +44,27 @@ class RbViewElement(private val node: NavigatablePsiElement, var view: RbItemPre
         )
         is RainSchemaStatementNode -> getChildOfType(
             node.braceBlock,
-            RainAttributeStatementNode::class.java,
+            NavigatablePsiElement::class.java,
         )
         is RainMetaStatementNode -> getChildOfType(
             node.braceBlock,
-            RainAttributeStatementNode::class.java,
+            NavigatablePsiElement::class.java,
         )
         is RainGlobalStatementNode -> getChildOfType(
             node.braceBlock,
-            RainAttributeStatementNode::class.java,
+            NavigatablePsiElement::class.java,
         )
+        is RainLanguageStatementNode -> getChildOfType(
+            node.braceBlock,
+            NavigatablePsiElement::class.java,
+        )
+        is RainAttributeStatementNode -> when {
+            node.objectInherit != null -> getChildOfType(
+                node.objectInherit!!.`object`.braceBlock,
+                NavigatablePsiElement::class.java,
+            )
+            else -> arrayOf()
+        }
         else -> arrayOf()
     }
 

@@ -86,7 +86,6 @@ language_statement ::= "language" identifier [COLON language_inherit] <<brace_bl
 };
 language_inherit ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
-// properties <ID>: <TYPE> { }
 attribute_statement ::= key eq (object_inherit|value+) {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinAttribute"
     // recoverWhile = brace_recover

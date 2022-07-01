@@ -15,7 +15,7 @@ abstract class MixinLanguage(node: ASTNode) : DeclareNode(node),
     }
 
     override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Nodes.Cvs_global, nameIdentifier.text)
+        return RbItemPresentation(AllIcons.FileTypes.AddAny, nameIdentifier.text)
     }
 
     override fun setName(name: String): PsiElement {

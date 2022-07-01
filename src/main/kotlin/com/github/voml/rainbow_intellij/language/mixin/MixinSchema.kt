@@ -16,12 +16,10 @@ abstract class MixinSchema(node: ASTNode) : DeclareNode(node),
     }
 
     override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Nodes.Module, nameIdentifier.text)
+        return RbItemPresentation(AllIcons.Gutter.Colors, nameIdentifier.text)
     }
 
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
     }
-
-
 }
