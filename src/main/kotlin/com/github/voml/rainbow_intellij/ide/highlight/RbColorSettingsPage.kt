@@ -5,7 +5,7 @@ import com.github.voml.rainbow_intellij.file.RainbowIcons
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 
-class JssColorSettingsPage : ColorSettingsPage {
+class RbColorSettingsPage : ColorSettingsPage {
     private val annotatorTags = RainbowColor
         .values()
         .associateBy({ it.name }, { it.textAttributesKey })
@@ -73,3 +73,5 @@ properties dimensions: object {
 
 
 }
+
+

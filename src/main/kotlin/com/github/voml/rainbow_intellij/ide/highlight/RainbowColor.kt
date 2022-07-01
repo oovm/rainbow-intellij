@@ -30,10 +30,10 @@ enum class RainbowColor(humanName: Supplier<@NlsContexts.AttributeDescriptor Str
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_CLASS(RainbowBundle.messagePointer("color.token.symbol.annotation"), Default.CLASS_NAME),
     SYM_SCHEMA(RainbowBundle.messagePointer("color.token.symbol.schema"), Default.PREDEFINED_SYMBOL),
-    SYM_FIELD(RainbowBundle.messagePointer("color.token.symbol.property"), Default.STATIC_FIELD),
-
+    SYM_LANGUAGE(RainbowBundle.messagePointer("color.token.symbol.language"), Default.CLASS_NAME),
+    SYM_ATTRIBUTE(RainbowBundle.messagePointer("color.token.symbol.attrubute"), Default.STATIC_FIELD),
+    SYM_FIELD(RainbowBundle.messagePointer("color.token.symbol.property"), Default.LOCAL_VARIABLE),
     //
     TYPE_HINT(RainbowBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
 
