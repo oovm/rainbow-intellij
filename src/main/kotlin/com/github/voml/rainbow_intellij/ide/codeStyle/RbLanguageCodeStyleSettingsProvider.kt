@@ -1,11 +1,11 @@
 package com.github.voml.rainbow_intellij.ide.codeStyle
 
-import com.github.voml.rainbow_intellij.RbLanguage
+import com.github.voml.rainbow_intellij.file.RainbowLanguage
 import com.intellij.application.options.SmartIndentOptionsEditor
 import com.intellij.psi.codeStyle.*
 
 class RbLanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsProvider() {
-    override fun getLanguage() = RbLanguage.INSTANCE
+    override fun getLanguage() = RainbowLanguage.INSTANCE
 
     override fun getIndentOptionsEditor() = SmartIndentOptionsEditor()
 

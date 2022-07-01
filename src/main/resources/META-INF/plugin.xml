@@ -1,25 +1,25 @@
 <idea-plugin>
-	<id>com.github.voml.rainbow_intellij</id>
-	<name>JSS Support</name>
+	<id>rainbow_intellij</id>
+	<name>Rainbow Language</name>
 	<vendor>voml</vendor>
 	<!-- Product and plugin compatibility requirements -->
 	<!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
 	<depends>com.intellij.modules.platform</depends>
 	<!--    <depends optional="true" config-file="plugin-with-rust.xml">org.rust.lang</depends>-->
-	<resource-bundle>messages.JssBundle</resource-bundle>
+	<resource-bundle>messages.RbBundle</resource-bundle>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType
-			name="JSS"
+			name="Rainbow"
 			language="Rainbow"
-			extensions="jss"
-			implementationClass="com.github.voml.rainbow_intellij.ide.file_view.JssFileType"
+			extensions="rmb"
+			implementationClass="com.github.voml.rainbow_intellij.file.RainbowFileType"
 			fieldName="INSTANCE"
 		/>
 		<lang.parserDefinition
 			language="Rainbow"
 			implementationClass="com.github.voml.rainbow_intellij.language.psi.RbParserDefinition"
 		/>
-		<projectViewNestingRulesProvider implementation="com.github.voml.rainbow_intellij.ide.file_view.JssFileGroup"/>
+		<projectViewNestingRulesProvider implementation="com.github.voml.rainbow_intellij.file.RainbowFileGroup"/>
 		<!-- Highlight -->
 		<additionalTextAttributes scheme="Default" file="colors/JssDefault.xml"/>
 		<additionalTextAttributes scheme="Darcula" file="colors/JssDarcula.xml"/>

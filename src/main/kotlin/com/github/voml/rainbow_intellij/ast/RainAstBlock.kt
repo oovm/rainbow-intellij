@@ -8,12 +8,12 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.formatter.FormatterUtil
 
-class JssAstBlock(
+class RainAstBlock(
     private val node: ASTNode,
     private val alignment: Alignment?,
     private val indent: Indent?,
     private val wrap: Wrap?,
-    val ctx: JssFormatterContext
+    val ctx: JssFormatterContext,
 ) : ASTBlock {
     override fun isLeaf(): Boolean = node.firstChildNode == null
 

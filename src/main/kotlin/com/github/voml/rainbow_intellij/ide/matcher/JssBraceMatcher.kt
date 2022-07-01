@@ -1,12 +1,12 @@
 package com.github.voml.rainbow_intellij.ide.matcher
 
-import com.github.voml.rainbow_intellij.RbLanguage
-import com.github.voml.rainbow_intellij.ide.file_view.JssFileType
+import com.github.voml.rainbow_intellij.file.RainbowLanguage
+import com.github.voml.rainbow_intellij.file.RainbowFileType
 import com.intellij.codeInsight.highlighting.PairedBraceMatcherAdapter
 import com.intellij.openapi.editor.highlighter.HighlighterIterator
 import com.intellij.openapi.fileTypes.FileType
 
-class JssBraceMatcher : PairedBraceMatcherAdapter(BaseBraceMatcher(), RbLanguage.INSTANCE) {
+class JssBraceMatcher : PairedBraceMatcherAdapter(BaseBraceMatcher(), RainbowLanguage.INSTANCE) {
     override fun isLBraceToken(iterator: HighlighterIterator, fileText: CharSequence, fileType: FileType): Boolean =
         isBrace(iterator, fileText, fileType, true)
 
@@ -19,7 +19,7 @@ class JssBraceMatcher : PairedBraceMatcherAdapter(BaseBraceMatcher(), RbLanguage
         fileType: FileType,
         left: Boolean
     ): Boolean {
-        if (fileType != JssFileType.INSTANCE) return false
+        if (fileType != RainbowFileType.INSTANCE) return false
         val pair = findPair(left, iterator, fileText, fileType)
         return pair != null
     }

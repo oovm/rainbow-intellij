@@ -1,7 +1,7 @@
 package com.github.voml.rainbow_intellij.ide.highlight
 
-import com.github.voml.rainbow_intellij.RbBundle
-import com.github.voml.rainbow_intellij.ide.file_view.JssIcons
+import com.github.voml.rainbow_intellij.file.RainbowBundle
+import com.github.voml.rainbow_intellij.file.RainbowIcons
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 
@@ -17,9 +17,9 @@ class JssColorSettingsPage : ColorSettingsPage {
 
     override fun getColorDescriptors(): Array<ColorDescriptor> = ColorDescriptor.EMPTY_ARRAY
 
-    override fun getDisplayName() = RbBundle.message("filetype.name")
+    override fun getDisplayName() = RainbowBundle.message("filetype.name")
 
-    override fun getIcon() = JssIcons.FILE
+    override fun getIcon() = RainbowIcons.RmbFile
 
     override fun getHighlighter() = JssSyntaxHighlighter()
 

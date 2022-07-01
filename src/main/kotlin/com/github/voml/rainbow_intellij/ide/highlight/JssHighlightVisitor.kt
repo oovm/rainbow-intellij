@@ -1,6 +1,6 @@
 package com.github.voml.rainbow_intellij.ide.highlight
 
-import com.github.voml.rainbow_intellij.ide.file_view.JssFile
+import com.github.voml.rainbow_intellij.file.RainbowFile
 import com.github.voml.rainbow_intellij.language.psi.*
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType
@@ -33,7 +33,7 @@ class JssHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
 
     override fun clone(): HighlightVisitor = JssHighlightVisitor()
 
-    override fun suitableForFile(file: PsiFile): Boolean = file is JssFile
+    override fun suitableForFile(file: PsiFile): Boolean = file is RainbowFile
 
     override fun visit(element: PsiElement) = element.accept(this)
 }

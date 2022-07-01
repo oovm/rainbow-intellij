@@ -1,17 +1,17 @@
 package com.github.voml.rainbow_intellij.ide.actions
 
-import com.github.voml.rainbow_intellij.RbBundle
-import com.github.voml.rainbow_intellij.ide.file_view.JssIcons
+import com.github.voml.rainbow_intellij.file.RainbowBundle
+import com.github.voml.rainbow_intellij.file.RainbowIcons
 import com.intellij.ide.actions.CreateFileFromTemplateAction
 import com.intellij.ide.actions.CreateFileFromTemplateDialog.*
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 
 class JssCreateFile :
-    CreateFileFromTemplateAction(name, description, JssIcons.FILE) {
+    CreateFileFromTemplateAction(name, description, RainbowIcons.RmbFile) {
     companion object {
-        private val name = RbBundle.message("action.create_file")
-        private val description = RbBundle.message("action.create_file.description")
+        private val name = RainbowBundle.message("action.create_file")
+        private val description = RainbowBundle.message("action.create_file.description")
     }
 
 
@@ -19,7 +19,7 @@ class JssCreateFile :
         builder
             .setTitle(name)
             // See [resources/colors/fileTemplate]
-            .addKind("Empty file", JssIcons.FILE, "Jss File")
+            .addKind("Empty file", RainbowIcons.RmbFile, "rmb File")
     }
 
 

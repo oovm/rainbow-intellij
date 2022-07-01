@@ -1,6 +1,6 @@
 package com.github.voml.rainbow_intellij.ide.matcher
 
-import com.github.voml.rainbow_intellij.ide.file_view.JssFile
+import com.github.voml.rainbow_intellij.file.RainbowFile
 import com.github.voml.rainbow_intellij.language.psi.RbToken
 
 import com.intellij.lang.ASTNode
@@ -19,7 +19,7 @@ class JssFoldingBuilder : CustomFoldingBuilder(), DumbAware {
         document: Document,
         quick: Boolean
     ) {
-        if (root !is JssFile) return
+        if (root !is RainbowFile) return
         val visitor = JssFoldingVisitor(descriptors)
         PsiTreeUtil.processElements(root) {
             it.accept(visitor);

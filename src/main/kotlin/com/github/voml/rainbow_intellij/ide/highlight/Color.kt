@@ -1,6 +1,6 @@
 package com.github.voml.rainbow_intellij.ide.highlight
 
-import com.github.voml.rainbow_intellij.RbBundle
+import com.github.voml.rainbow_intellij.file.RainbowBundle
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.editor.HighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
@@ -15,26 +15,26 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
 enum class Color(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, default: TextAttributesKey? = null) {
     // 特殊关键词
     KEYWORD(OptionsBundle.messagePointer("options.language.defaults.keyword"), Default.KEYWORD),
-    IDIOM_SYMBOL(RbBundle.messagePointer("color.token.symbol.idiom"), Default.METADATA),
-    IDIOM_MARK(RbBundle.messagePointer("color.token.idiom_mark"), IDIOM_SYMBOL.textAttributesKey),
-    PROP_MARK(RbBundle.messagePointer("color.token.properties_mark"), KEYWORD.textAttributesKey),
+    IDIOM_SYMBOL(RainbowBundle.messagePointer("color.token.symbol.idiom"), Default.METADATA),
+    IDIOM_MARK(RainbowBundle.messagePointer("color.token.idiom_mark"), IDIOM_SYMBOL.textAttributesKey),
+    PROP_MARK(RainbowBundle.messagePointer("color.token.properties_mark"), KEYWORD.textAttributesKey),
 
     // 字面量
-    NULL(RbBundle.messagePointer("color.token.null"), Default.KEYWORD),
-    BOOLEAN(RbBundle.messagePointer("color.token.boolean"), Default.KEYWORD),
-    DECIMAL(RbBundle.messagePointer("color.token.decimal"), Default.NUMBER),
-    INTEGER(RbBundle.messagePointer("color.token.integer"), Default.NUMBER),
-    STRING(RbBundle.messagePointer("color.token.string"), Default.STRING),
-    URL(RbBundle.messagePointer("color.token.url"), STRING.textAttributesKey),
+    NULL(RainbowBundle.messagePointer("color.token.null"), Default.KEYWORD),
+    BOOLEAN(RainbowBundle.messagePointer("color.token.boolean"), Default.KEYWORD),
+    DECIMAL(RainbowBundle.messagePointer("color.token.decimal"), Default.NUMBER),
+    INTEGER(RainbowBundle.messagePointer("color.token.integer"), Default.NUMBER),
+    STRING(RainbowBundle.messagePointer("color.token.string"), Default.STRING),
+    URL(RainbowBundle.messagePointer("color.token.url"), STRING.textAttributesKey),
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_ANNO(RbBundle.messagePointer("color.token.symbol.annotation"), Default.STATIC_METHOD),
-    SYM_PROP(RbBundle.messagePointer("color.token.symbol.property"), Default.STATIC_FIELD),
-    SYM_SCHEMA(RbBundle.messagePointer("color.token.symbol.schema"), Default.PREDEFINED_SYMBOL),
+    SYM_ANNO(RainbowBundle.messagePointer("color.token.symbol.annotation"), Default.STATIC_METHOD),
+    SYM_PROP(RainbowBundle.messagePointer("color.token.symbol.property"), Default.STATIC_FIELD),
+    SYM_SCHEMA(RainbowBundle.messagePointer("color.token.symbol.schema"), Default.PREDEFINED_SYMBOL),
 
     //
-    TYPE_HINT(RbBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
+    TYPE_HINT(RainbowBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
 
     // 标点符号
     PARENTHESES(OptionsBundle.messagePointer("options.language.defaults.parentheses"), Default.PARENTHESES),
@@ -42,7 +42,7 @@ enum class Color(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, d
     BRACES(OptionsBundle.messagePointer("options.language.defaults.braces"), Default.BRACES),
     DOT(OptionsBundle.messagePointer("options.language.defaults.dot"), Default.DOT),
     COMMA(OptionsBundle.messagePointer("options.language.defaults.comma"), Default.COMMA),
-    SET(RbBundle.messagePointer("color.token.set"), Default.OPERATION_SIGN),
+    SET(RainbowBundle.messagePointer("color.token.set"), Default.OPERATION_SIGN),
     SEMICOLON(OptionsBundle.messagePointer("options.language.defaults.semicolon"), Default.SEMICOLON),
 
     // 注释

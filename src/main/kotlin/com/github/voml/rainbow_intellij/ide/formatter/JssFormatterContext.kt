@@ -1,6 +1,6 @@
 package com.github.voml.rainbow_intellij.ide.formatter
 
-import com.github.voml.rainbow_intellij.RbLanguage
+import com.github.voml.rainbow_intellij.file.RainbowLanguage
 import com.github.voml.rainbow_intellij.language.psi.RbToken
 
 import com.intellij.formatting.SpacingBuilder
@@ -14,7 +14,7 @@ data class JssFormatterContext(
 ) {
     companion object {
         fun create(settings: CodeStyleSettings): JssFormatterContext {
-            val commonSettings = settings.getCommonSettings(RbLanguage.INSTANCE)
+            val commonSettings = settings.getCommonSettings(RainbowLanguage.INSTANCE)
             return JssFormatterContext(commonSettings, createSpacingBuilder(commonSettings))
         }
 

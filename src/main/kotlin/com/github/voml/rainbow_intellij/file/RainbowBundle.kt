@@ -1,13 +1,13 @@
-package com.github.voml.rainbow_intellij
+package com.github.voml.rainbow_intellij.file
 
-import com.github.voml.rainbow_intellij.RbLanguage.Companion.BUNDLE
+import com.github.voml.rainbow_intellij.file.RainbowLanguage.Companion.BUNDLE
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.Nls
 import org.jetbrains.annotations.PropertyKey
 import java.util.function.Supplier
 
 
-object RbBundle : DynamicBundle(BUNDLE) {
+object RainbowBundle : DynamicBundle(BUNDLE) {
 
     @Suppress("SpreadOperator")
     @JvmStatic

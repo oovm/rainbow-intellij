@@ -1,7 +1,7 @@
 package com.github.voml.rainbow_intellij.language.psi
 
-import com.github.voml.rainbow_intellij.RbLanguage
-import com.github.voml.rainbow_intellij.ide.file_view.JssFile
+import com.github.voml.rainbow_intellij.file.RainbowLanguage
+import com.github.voml.rainbow_intellij.file.RainbowFile
 import com.github.voml.rainbow_intellij.language.parser.RbParser
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
@@ -28,7 +28,7 @@ class RbParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode): PsiElement = RbToken.Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = JssFile(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = RainbowFile(viewProvider)
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): ParserDefinition.SpaceRequirements {
         return ParserDefinition.SpaceRequirements.MAY
@@ -37,6 +37,6 @@ class RbParserDefinition : ParserDefinition {
     companion object {
         val COMMENTS = TokenSet.create(RbToken.COMMENT, RbToken.COMMENT_BLOCK)
         val STRING_LITERALS = TokenSet.create(RbToken.STRING_INLINE, RbToken.STRING_MULTI)
-        val FILE = IFileElementType(RbLanguage.INSTANCE)
+        val FILE = IFileElementType(RainbowLanguage.INSTANCE)
     }
 }

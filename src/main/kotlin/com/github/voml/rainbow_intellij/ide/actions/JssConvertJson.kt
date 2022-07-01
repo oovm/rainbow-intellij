@@ -1,23 +1,20 @@
 package com.github.voml.rainbow_intellij.ide.actions
 
-import com.github.voml.rainbow_intellij.RbBundle
-import com.github.voml.rainbow_intellij.ide.file_view.JssFileType
-import com.github.voml.rainbow_intellij.ide.file_view.JssIcons
+import com.github.voml.rainbow_intellij.file.RainbowBundle
+import com.github.voml.rainbow_intellij.file.RainbowFileType
+import com.github.voml.rainbow_intellij.file.RainbowIcons
 import com.intellij.ide.actions.CreateFileAction
 import com.intellij.json.psi.JsonFile
 import com.intellij.json.psi.JsonObject
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
-import com.intellij.openapi.application.WriteAction
-import com.intellij.psi.PsiDirectory
-import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiFileFactory
 
-class JssConvertJson : CreateFileAction(name, description, JssIcons.FILE) {
+class JssConvertJson : CreateFileAction(name, description, RainbowIcons.RmbFile) {
     companion object {
-        private val name = RbBundle.message("action.convert_json")
-        private val description = RbBundle.message("action.convert_json.description")
+        private val name = RainbowBundle.message("action.convert_json")
+        private val description = RainbowBundle.message("action.convert_json.description")
 
     }
 
@@ -51,7 +48,7 @@ fun createFromJson(source: JsonFile, name: String): PsiFile? {
         """${document.propertyList}
 """
     )
-    return PsiFileFactory.getInstance(source.project).createFileFromText(name, JssFileType.INSTANCE, buffer)
+    return PsiFileFactory.getInstance(source.project).createFileFromText(name, RainbowFileType.INSTANCE, buffer)
 }
 
 fun tryGetJsonSchema(file: PsiFile): JsonObject? {
