@@ -28,10 +28,4 @@ public class RainStringMultiNode extends ASTWrapperPsiElement implements RainStr
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getString() {
-    return findNotNullChildByType(STRING);
-  }
-
 }

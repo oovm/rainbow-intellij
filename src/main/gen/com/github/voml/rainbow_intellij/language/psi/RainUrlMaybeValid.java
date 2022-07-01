@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface RainUrlMaybeValid extends PsiElement {
 
-  @NotNull
-  PsiElement getUrl();
-
 }

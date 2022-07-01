@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainAnnoStatementNode extends ASTWrapperPsiElement implements RainAnnoStatement {
+public class RainNumberNode extends ASTWrapperPsiElement implements RainNumber {
 
-  public RainAnnoStatementNode(@NotNull ASTNode node) {
+  public RainNumberNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitAnnoStatement(this);
+    visitor.visitNumber(this);
   }
 
   @Override
@@ -29,21 +29,27 @@ public class RainAnnoStatementNode extends ASTWrapperPsiElement implements RainA
   }
 
   @Override
-  @NotNull
-  public RainValue getValue() {
-    return findNotNullChildByClass(RainValue.class);
+  @Nullable
+  public PsiElement getByte() {
+    return findChildByType(BYTE);
   }
 
   @Override
   @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
+  public PsiElement getDecimal() {
+    return findChildByType(DECIMAL);
   }
 
   @Override
   @Nullable
-  public PsiElement getSymbol() {
-    return findChildByType(SYMBOL);
+  public PsiElement getInteger() {
+    return findChildByType(INTEGER);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSign() {
+    return findChildByType(SIGN);
   }
 
 }

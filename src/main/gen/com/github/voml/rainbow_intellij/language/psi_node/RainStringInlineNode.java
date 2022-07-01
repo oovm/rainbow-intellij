@@ -28,10 +28,4 @@ public class RainStringInlineNode extends ASTWrapperPsiElement implements RainSt
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getString() {
-    return findNotNullChildByType(STRING);
-  }
-
 }

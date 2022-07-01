@@ -13,7 +13,4 @@ public interface RainKvPair extends PsiElement {
   @NotNull
   RainValue getValue();
 
-  @Nullable
-  PsiElement getSymbol();
-
 }

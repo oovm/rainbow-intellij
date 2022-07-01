@@ -25,6 +25,10 @@ class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
         highlight(o.global, RainbowColor.KEYWORD)
     }
 
+    override fun visitFieldStatement(o: RainFieldStatement) {
+        highlight(o.key, RainbowColor.SYM_FIELD)
+    }
+
     private fun highlight(element: PsiElement, color: RainbowColor) {
         val builder = HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION)
         builder.textAttributes(color.textAttributesKey)

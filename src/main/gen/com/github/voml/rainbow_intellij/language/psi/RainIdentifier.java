@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface RainIdentifier extends PsiElement {
 
-  @NotNull
-  PsiElement getSymbol();
-
 }

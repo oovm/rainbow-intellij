@@ -28,16 +28,4 @@ public class RainKeyNode extends ASTWrapperPsiElement implements RainKey {
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getSymbol() {
-    return findChildByType(SYMBOL);
-  }
-
 }

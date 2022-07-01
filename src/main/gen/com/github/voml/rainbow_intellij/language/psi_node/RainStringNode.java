@@ -12,20 +12,32 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainIdiomMarkNode extends ASTWrapperPsiElement implements RainIdiomMark {
+public class RainStringNode extends ASTWrapperPsiElement implements RainString {
 
-  public RainIdiomMarkNode(@NotNull ASTNode node) {
+  public RainStringNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitIdiomMark(this);
+    visitor.visitString(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof RainVisitor) accept((RainVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public RainStringInline getStringInline() {
+    return findChildByClass(RainStringInline.class);
+  }
+
+  @Override
+  @Nullable
+  public RainStringMulti getStringMulti() {
+    return findChildByClass(RainStringMulti.class);
   }
 
 }

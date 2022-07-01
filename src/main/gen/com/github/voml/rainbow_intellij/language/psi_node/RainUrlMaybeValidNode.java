@@ -28,10 +28,4 @@ public class RainUrlMaybeValidNode extends ASTWrapperPsiElement implements RainU
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getUrl() {
-    return findNotNullChildByType(URL);
-  }
-
 }

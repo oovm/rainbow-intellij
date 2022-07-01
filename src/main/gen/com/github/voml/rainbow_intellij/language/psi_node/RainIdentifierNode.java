@@ -28,10 +28,4 @@ public class RainIdentifierNode extends ASTWrapperPsiElement implements RainIden
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getSymbol() {
-    return findNotNullChildByType(SYMBOL);
-  }
-
 }

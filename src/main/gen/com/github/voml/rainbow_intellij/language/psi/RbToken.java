@@ -8,7 +8,6 @@ import com.github.voml.rainbow_intellij.language.psi_node.*;
 
 public interface RbToken {
 
-  IElementType ANNO_STATEMENT = new RbElementType("ANNO_STATEMENT");
   IElementType ARRAY = new RbElementType("ARRAY");
   IElementType BOOLEAN = new RbElementType("BOOLEAN");
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
@@ -16,18 +15,16 @@ public interface RbToken {
   IElementType FIELD_STATEMENT = new RbElementType("FIELD_STATEMENT");
   IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
   IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
-  IElementType IDIOM_MARK = new RbElementType("IDIOM_MARK");
-  IElementType IDIOM_STATEMENT = new RbElementType("IDIOM_STATEMENT");
-  IElementType IDIOM_SYMBOL = new RbElementType("IDIOM_SYMBOL");
   IElementType KEY = new RbElementType("KEY");
   IElementType KV_PAIR = new RbElementType("KV_PAIR");
   IElementType META_STATEMENT = new RbElementType("META_STATEMENT");
   IElementType NULL = new RbElementType("NULL");
+  IElementType NUMBER = new RbElementType("NUMBER");
   IElementType OBJECT = new RbElementType("OBJECT");
   IElementType SCHEMA_STATEMENT = new RbElementType("SCHEMA_STATEMENT");
+  IElementType STRING = new RbElementType("STRING");
   IElementType STRING_INLINE = new RbElementType("STRING_INLINE");
   IElementType STRING_MULTI = new RbElementType("STRING_MULTI");
-  IElementType TYPE_HINT = new RbElementType("TYPE_HINT");
   IElementType URL_MAYBE_VALID = new RbElementType("URL_MAYBE_VALID");
   IElementType VALUE = new RbElementType("VALUE");
 
@@ -42,9 +39,9 @@ public interface RbToken {
   IElementType BYTE = new RbTokenType("BYTE");
   IElementType COLON = new RbTokenType(":");
   IElementType COMMA = new RbTokenType(",");
-  IElementType COMMENT = new RbTokenType("COMMENT");
-  IElementType COMMENT_BLOCK = new RbTokenType("COMMENT_BLOCK");
-  IElementType COMMENT_DOCUMENT = new RbTokenType("COMMENT_DOCUMENT");
+  IElementType COMMENT = new RbTokenType("Comment");
+  IElementType COMMENT_BLOCK = new RbTokenType("Comment Block");
+  IElementType COMMENT_DOCUMENT = new RbTokenType("Comment Document");
   IElementType DECIMAL = new RbTokenType("DECIMAL");
   IElementType DOLLAR = new RbTokenType("$");
   IElementType DOT = new RbTokenType(".");
@@ -55,17 +52,14 @@ public interface RbToken {
   IElementType SEMICOLON = new RbTokenType(";");
   IElementType SIGN = new RbTokenType("SIGN");
   IElementType STAR = new RbTokenType("*");
-  IElementType STRING = new RbTokenType("STRING");
-  IElementType SYMBOL = new RbTokenType("SYMBOL");
-  IElementType URL = new RbTokenType("URL");
+  IElementType STRING_RAW = new RbTokenType("String");
+  IElementType SYMBOL = new RbTokenType("Symbol");
+  IElementType URL = new RbTokenType("Url");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ANNO_STATEMENT) {
-        return new RainAnnoStatementNode(node);
-      }
-      else if (type == ARRAY) {
+      if (type == ARRAY) {
         return new RainArrayNode(node);
       }
       else if (type == BOOLEAN) {
@@ -86,15 +80,6 @@ public interface RbToken {
       else if (type == IDENTIFIER) {
         return new RainIdentifierNode(node);
       }
-      else if (type == IDIOM_MARK) {
-        return new RainIdiomMarkNode(node);
-      }
-      else if (type == IDIOM_STATEMENT) {
-        return new RainIdiomStatementNode(node);
-      }
-      else if (type == IDIOM_SYMBOL) {
-        return new RainIdiomSymbolNode(node);
-      }
       else if (type == KEY) {
         return new RainKeyNode(node);
       }
@@ -107,20 +92,23 @@ public interface RbToken {
       else if (type == NULL) {
         return new RainNullNode(node);
       }
+      else if (type == NUMBER) {
+        return new RainNumberNode(node);
+      }
       else if (type == OBJECT) {
         return new RainObjectNode(node);
       }
       else if (type == SCHEMA_STATEMENT) {
         return new RainSchemaStatementNode(node);
       }
+      else if (type == STRING) {
+        return new RainStringNode(node);
+      }
       else if (type == STRING_INLINE) {
         return new RainStringInlineNode(node);
       }
       else if (type == STRING_MULTI) {
         return new RainStringMultiNode(node);
-      }
-      else if (type == TYPE_HINT) {
-        return new RainTypeHintNode(node);
       }
       else if (type == URL_MAYBE_VALID) {
         return new RainUrlMaybeValidNode(node);

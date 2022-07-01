@@ -29,7 +29,7 @@ data class JssFormatterContext(
             RbToken.BRACKET_L,
             RbToken.COLON,
         )
-        private val remove_space_newline_after = TokenSet.create(RbToken.IDIOM_MARK, RbToken.PROPERTIES_MARK)
+        private val remove_space_newline_after = TokenSet.create()
 
         private val separators = TokenSet.create(RbToken.COMMA, RbToken.SEMICOLON)
 
@@ -42,7 +42,7 @@ data class JssFormatterContext(
                 // k = v
                 .around(RbToken.EQ).spacing(1, 1, 0, commonSettings.KEEP_LINE_BREAKS, 0)
                 // SpacingBuilder { }
-                .before(RbToken.PROPERTIES_BLOCK).spacing(1, 1, 0, commonSettings.KEEP_LINE_BREAKS, 0)
+                // .before(RbToken.PROPERTIES_BLOCK).spacing(1, 1, 0, commonSettings.KEEP_LINE_BREAKS, 0)
 
             return custom
                 .before(remove_space_before).spaceIf(false)

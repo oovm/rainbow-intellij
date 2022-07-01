@@ -40,10 +40,4 @@ public class RainKvPairNode extends ASTWrapperPsiElement implements RainKvPair {
     return findNotNullChildByClass(RainValue.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getSymbol() {
-    return findChildByType(SYMBOL);
-  }
-
 }

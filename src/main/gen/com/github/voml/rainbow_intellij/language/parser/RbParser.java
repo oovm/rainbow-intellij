@@ -48,31 +48,6 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STRING | SYMBOL
-  static boolean anno_key(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "anno_key")) return false;
-    if (!nextTokenIs(b, "", STRING, SYMBOL)) return false;
-    boolean r;
-    r = consumeToken(b, STRING);
-    if (!r) r = consumeToken(b, SYMBOL);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // anno_key set value
-  public static boolean anno_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "anno_statement")) return false;
-    if (!nextTokenIs(b, "<anno statement>", STRING, SYMBOL)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ANNO_STATEMENT, "<anno statement>");
-    r = anno_key(b, l + 1);
-    r = r && set(b, l + 1);
-    r = r && value(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // <<bracket_block value ignore>>
   public static boolean array(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array")) return false;
@@ -209,7 +184,7 @@ public class RbParser implements PsiParser, LightPsiParser {
   // key eq value+
   public static boolean field_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "field_statement")) return false;
-    if (!nextTokenIs(b, "<field statement>", STRING, SYMBOL)) return false;
+    if (!nextTokenIs(b, "<field statement>", STRING_RAW, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, FIELD_STATEMENT, "<field statement>");
     r = key(b, l + 1);
@@ -259,52 +234,6 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOLLAR
-  public static boolean idiom_mark(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "idiom_mark")) return false;
-    if (!nextTokenIs(b, DOLLAR)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, DOLLAR);
-    exit_section_(b, m, IDIOM_MARK, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // idiom_mark idiom_symbol [COLON] value
-  public static boolean idiom_statement(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "idiom_statement")) return false;
-    if (!nextTokenIs(b, DOLLAR)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = idiom_mark(b, l + 1);
-    r = r && idiom_symbol(b, l + 1);
-    r = r && idiom_statement_2(b, l + 1);
-    r = r && value(b, l + 1);
-    exit_section_(b, m, IDIOM_STATEMENT, r);
-    return r;
-  }
-
-  // [COLON]
-  private static boolean idiom_statement_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "idiom_statement_2")) return false;
-    consumeToken(b, COLON);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // SYMBOL
-  public static boolean idiom_symbol(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "idiom_symbol")) return false;
-    if (!nextTokenIs(b, SYMBOL)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, SYMBOL);
-    exit_section_(b, m, IDIOM_SYMBOL, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // SEMICOLON | COMMA
   static boolean ignore(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ignore")) return false;
@@ -316,13 +245,13 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STRING | SYMBOL
+  // STRING_RAW | SYMBOL
   public static boolean key(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "key")) return false;
-    if (!nextTokenIs(b, "<key>", STRING, SYMBOL)) return false;
+    if (!nextTokenIs(b, "<key>", STRING_RAW, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KEY, "<key>");
-    r = consumeToken(b, STRING);
+    r = consumeToken(b, STRING_RAW);
     if (!r) r = consumeToken(b, SYMBOL);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -332,7 +261,7 @@ public class RbParser implements PsiParser, LightPsiParser {
   // (string_inline|SYMBOL) eq value
   public static boolean kv_pair(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "kv_pair")) return false;
-    if (!nextTokenIs(b, "<kv pair>", STRING, SYMBOL)) return false;
+    if (!nextTokenIs(b, "<kv pair>", STRING_RAW, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KV_PAIR, "<kv pair>");
     r = kv_pair_0(b, l + 1);
@@ -376,37 +305,37 @@ public class RbParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE
-  static boolean num(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num")) return false;
+  public static boolean number(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number")) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = num_0(b, l + 1);
-    if (!r) r = num_1(b, l + 1);
-    exit_section_(b, m, null, r);
+    Marker m = enter_section_(b, l, _NONE_, NUMBER, "<number>");
+    r = number_0(b, l + 1);
+    if (!r) r = number_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // [SIGN] (INTEGER | DECIMAL)
-  private static boolean num_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num_0")) return false;
+  private static boolean number_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = num_0_0(b, l + 1);
-    r = r && num_0_1(b, l + 1);
+    r = number_0_0(b, l + 1);
+    r = r && number_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // [SIGN]
-  private static boolean num_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num_0_0")) return false;
+  private static boolean number_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number_0_0")) return false;
     consumeToken(b, SIGN);
     return true;
   }
 
   // INTEGER | DECIMAL
-  private static boolean num_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num_0_1")) return false;
+  private static boolean number_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number_0_1")) return false;
     boolean r;
     r = consumeToken(b, INTEGER);
     if (!r) r = consumeToken(b, DECIMAL);
@@ -414,19 +343,19 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   // [SIGN] BYTE
-  private static boolean num_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num_1")) return false;
+  private static boolean number_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = num_1_0(b, l + 1);
+    r = number_1_0(b, l + 1);
     r = r && consumeToken(b, BYTE);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // [SIGN]
-  private static boolean num_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "num_1_0")) return false;
+  private static boolean number_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "number_1_0")) return false;
     consumeToken(b, SIGN);
     return true;
   }
@@ -458,17 +387,13 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // idiom_statement
-  //   | field_statement
-  //   | anno_statement
+  // field_statement
   //   | COMMENT_DOCUMENT
   //   | kv_pair
   static boolean properties_inner(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "properties_inner")) return false;
     boolean r;
-    r = idiom_statement(b, l + 1);
-    if (!r) r = field_statement(b, l + 1);
-    if (!r) r = anno_statement(b, l + 1);
+    r = field_statement(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT_DOCUMENT);
     if (!r) r = kv_pair(b, l + 1);
     return r;
@@ -485,12 +410,6 @@ public class RbParser implements PsiParser, LightPsiParser {
     r = r && brace_block(b, l + 1, RbParser::properties_inner, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  /* ********************************************************** */
-  // COLON
-  static boolean set(PsiBuilder b, int l) {
-    return consumeToken(b, COLON);
   }
 
   /* ********************************************************** */
@@ -512,60 +431,38 @@ public class RbParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // string_inline|string_multi
-  static boolean str(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "str")) return false;
-    if (!nextTokenIs(b, STRING)) return false;
+  public static boolean string(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string")) return false;
+    if (!nextTokenIs(b, STRING_RAW)) return false;
     boolean r;
+    Marker m = enter_section_(b);
     r = string_inline(b, l + 1);
     if (!r) r = string_multi(b, l + 1);
+    exit_section_(b, m, STRING, r);
     return r;
   }
 
   /* ********************************************************** */
-  // STRING
+  // STRING_RAW
   public static boolean string_inline(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string_inline")) return false;
-    if (!nextTokenIs(b, STRING)) return false;
+    if (!nextTokenIs(b, STRING_RAW)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, STRING);
+    r = consumeToken(b, STRING_RAW);
     exit_section_(b, m, STRING_INLINE, r);
     return r;
   }
 
   /* ********************************************************** */
-  // STRING
+  // STRING_RAW
   public static boolean string_multi(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "string_multi")) return false;
-    if (!nextTokenIs(b, STRING)) return false;
+    if (!nextTokenIs(b, STRING_RAW)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, STRING);
+    r = consumeToken(b, STRING_RAW);
     exit_section_(b, m, STRING_MULTI, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // COLON type_symbol
-  public static boolean type_hint(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_hint")) return false;
-    if (!nextTokenIs(b, COLON)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COLON);
-    r = r && type_symbol(b, l + 1);
-    exit_section_(b, m, TYPE_HINT, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // SYMBOL | STRING
-  static boolean type_symbol(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_symbol")) return false;
-    if (!nextTokenIs(b, "", STRING, SYMBOL)) return false;
-    boolean r;
-    r = consumeToken(b, SYMBOL);
-    if (!r) r = consumeToken(b, STRING);
     return r;
   }
 
@@ -582,18 +479,19 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // null | boolean | num | str | array | object | url_maybe_valid
+  // null | boolean | number | string | array | object | url_maybe_valid | identifier
   public static boolean value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VALUE, "<value>");
     r = null_$(b, l + 1);
     if (!r) r = boolean_$(b, l + 1);
-    if (!r) r = num(b, l + 1);
-    if (!r) r = str(b, l + 1);
+    if (!r) r = number(b, l + 1);
+    if (!r) r = string(b, l + 1);
     if (!r) r = array(b, l + 1);
     if (!r) r = object(b, l + 1);
     if (!r) r = url_maybe_valid(b, l + 1);
+    if (!r) r = identifier(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface RainStringInline extends PsiElement {
 
-  @NotNull
-  PsiElement getString();
-
 }

@@ -7,10 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public class RainVisitor extends PsiElementVisitor {
 
-  public void visitAnnoStatement(@NotNull RainAnnoStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitArray(@NotNull RainArray o) {
     visitPsiElement(o);
   }
@@ -39,18 +35,6 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitIdiomMark(@NotNull RainIdiomMark o) {
-    visitPsiElement(o);
-  }
-
-  public void visitIdiomStatement(@NotNull RainIdiomStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitIdiomSymbol(@NotNull RainIdiomSymbol o) {
-    visitPsiElement(o);
-  }
-
   public void visitKey(@NotNull RainKey o) {
     visitPsiElement(o);
   }
@@ -67,6 +51,10 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitNumber(@NotNull RainNumber o) {
+    visitPsiElement(o);
+  }
+
   public void visitObject(@NotNull RainObject o) {
     visitPsiElement(o);
   }
@@ -75,15 +63,15 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitString(@NotNull RainString o) {
+    visitPsiElement(o);
+  }
+
   public void visitStringInline(@NotNull RainStringInline o) {
     visitPsiElement(o);
   }
 
   public void visitStringMulti(@NotNull RainStringMulti o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTypeHint(@NotNull RainTypeHint o) {
     visitPsiElement(o);
   }
 

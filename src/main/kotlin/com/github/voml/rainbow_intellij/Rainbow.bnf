@@ -18,18 +18,18 @@
 
     tokens = [
         // comment
-        COMMENT_DOCUMENT = 'regexp:(///)[^\r\n]*'
-        COMMENT = 'regexp:(//)[^\r\n]*'
-        COMMENT_BLOCK = 'regexp:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]'
+        COMMENT_DOCUMENT = 'Comment Document'
+        COMMENT = 'Comment'
+        COMMENT_BLOCK = 'Comment Block'
 
         // literal
-        URL = 'regexp: [A-Za-z0-9]+://[\-\p{XID_Continue}./?&#]+'
-        SYMBOL = 'regexp:[\p{XID_Start}_][\p{XID_Continue}_]*'
-        STRING = 'regexp:"([^"\\]|\\.)*"'
+        URL = 'Url'
+        SYMBOL = 'Symbol'
+        STRING_RAW = 'String'
 
-        BYTE = 'regexp:(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)'
-        INTEGER = 'regexp:(0|[1-9][0-9_]*)'
-        DECIMAL = 'regexp:([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)'
+        BYTE = 'Byte'
+        INTEGER = 'Integer'
+        DECIMAL = 'Decimal'
         SIGN = 'regexp:[+-]'
 
         PARENTHESIS_L = '('
@@ -84,29 +84,14 @@ global_statement ::= "global" <<brace_block properties_inner ignore>> {
 field_statement ::= key eq value+ {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinField"
 };
-key ::= STRING | SYMBOL;
-value ::= null | boolean | num | str | array | object | url_maybe_valid;
+key ::= STRING_RAW | SYMBOL;
+value ::= null | boolean | number | string | array | object | url_maybe_valid | identifier;
 // used in formatter
 private properties_inner ::=
-    idiom_statement
-  | field_statement
-  | anno_statement
+    field_statement
   | COMMENT_DOCUMENT
   | kv_pair // consider as anno
   ;
-// ---------------------------------------------------------------------------------------------------------------------
-// $schema: https://json-schema.org/draft/2020-12/schema
-idiom_statement ::= idiom_mark idiom_symbol [COLON] value;
-idiom_mark ::= DOLLAR;
-idiom_symbol ::= SYMBOL;
-// ---------------------------------------------------------------------------------------------------------------------
-// <KEY>: <VALUE>
-anno_statement ::= anno_key set value;
-private set ::= COLON;
-private anno_key ::= STRING | SYMBOL;
-// ---------------------------------------------------------------------------------------------------------------------
-type_hint ::= COLON type_symbol;
-private type_symbol ::= SYMBOL | STRING;
 // ---------------------------------------------------------------------------------------------------------------------
 //symbol_path ::= key (DOT key)*;
 //private key ::= string_inline | key_symbol | INTEGER;
@@ -117,11 +102,11 @@ boolean ::= "true" | "false";
 // used in annotation
 url_maybe_valid ::= URL;
 // ---------------------------------------------------------------------------------------------------------------------
-private num ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
+number ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
 // ---------------------------------------------------------------------------------------------------------------------
-private str ::= (string_inline|string_multi);
-string_inline ::= STRING;
-string_multi ::= STRING;
+string ::= (string_inline|string_multi);
+string_inline ::= STRING_RAW;
+string_multi ::= STRING_RAW;
 // ---------------------------------------------------------------------------------------------------------------------
 array ::= <<bracket_block value ignore>>;
 object ::= <<brace_block kv_pair ignore>>;

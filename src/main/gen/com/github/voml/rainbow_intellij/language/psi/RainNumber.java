@@ -5,28 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainAttributeValue extends PsiElement {
-
-  @Nullable
-  RainArray getArray();
-
-  @Nullable
-  RainBoolean getBoolean();
-
-  @Nullable
-  RainNull getNull();
-
-  @Nullable
-  RainObject getObject();
-
-  @Nullable
-  RainStringInline getStringInline();
-
-  @Nullable
-  RainStringMulti getStringMulti();
-
-  @Nullable
-  RainUrlMaybeValid getUrlMaybeValid();
+public interface RainNumber extends PsiElement {
 
   @Nullable
   PsiElement getByte();
