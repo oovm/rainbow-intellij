@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainValueNode extends ASTWrapperPsiElement implements RainValue {
+public class RainObjectInheritNode extends ASTWrapperPsiElement implements RainObjectInherit {
 
-  public RainValueNode(@NotNull ASTNode node) {
+  public RainObjectInheritNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitValue(this);
+    visitor.visitObjectInherit(this);
   }
 
   @Override
@@ -30,50 +30,14 @@ public class RainValueNode extends ASTWrapperPsiElement implements RainValue {
 
   @Override
   @Nullable
-  public RainArray getArray() {
-    return findChildByClass(RainArray.class);
-  }
-
-  @Override
-  @Nullable
-  public RainBoolean getBoolean() {
-    return findChildByClass(RainBoolean.class);
-  }
-
-  @Override
-  @Nullable
-  public RainColor getColor() {
-    return findChildByClass(RainColor.class);
-  }
-
-  @Override
-  @Nullable
   public RainNamespace getNamespace() {
     return findChildByClass(RainNamespace.class);
   }
 
   @Override
-  @Nullable
-  public RainNull getNull() {
-    return findChildByClass(RainNull.class);
-  }
-
-  @Override
-  @Nullable
-  public RainNumber getNumber() {
-    return findChildByClass(RainNumber.class);
-  }
-
-  @Override
-  @Nullable
-  public RainString getString() {
-    return findChildByClass(RainString.class);
-  }
-
-  @Override
-  @Nullable
-  public RainUrlMaybeValid getUrlMaybeValid() {
-    return findChildByClass(RainUrlMaybeValid.class);
+  @NotNull
+  public RainObject getObject() {
+    return findNotNullChildByClass(RainObject.class);
   }
 
 }

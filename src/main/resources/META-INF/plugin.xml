@@ -27,7 +27,7 @@
 		<highlightVisitor implementation="com.github.voml.rainbow_intellij.ide.highlight.RbHighlightVisitor"/>
 		<lang.syntaxHighlighter
 			language="Rainbow"
-			implementationClass="com.github.voml.rainbow_intellij.ide.highlight.JssSyntaxHighlighter"
+			implementationClass="com.github.voml.rainbow_intellij.ide.highlight.RbTokenHighlighter"
 		/>
 		<!-- Formatter -->
 		<lang.formatter

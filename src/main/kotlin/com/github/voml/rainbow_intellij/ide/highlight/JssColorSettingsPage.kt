@@ -21,7 +21,7 @@ class JssColorSettingsPage : ColorSettingsPage {
 
     override fun getIcon() = RainbowIcons.RmbFile
 
-    override fun getHighlighter() = JssSyntaxHighlighter()
+    override fun getHighlighter() = RbTokenHighlighter()
 
     override fun getAdditionalHighlightingTagToDescriptorMap() = annotatorTags
 

@@ -26,6 +26,7 @@ enum class RainbowColor(humanName: Supplier<@NlsContexts.AttributeDescriptor Str
     INTEGER(RainbowBundle.messagePointer("color.token.integer"), Default.NUMBER),
     STRING(RainbowBundle.messagePointer("color.token.string"), Default.STRING),
     URL(RainbowBundle.messagePointer("color.token.url"), STRING.textAttributesKey),
+    COLOR(OptionsBundle.messagePointer("options.language.defaults.color"), Default.METADATA),
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),

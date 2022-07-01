@@ -26,9 +26,6 @@ public interface RainValue extends PsiElement {
   RainNumber getNumber();
 
   @Nullable
-  RainObject getObject();
-
-  @Nullable
   RainString getString();
 
   @Nullable

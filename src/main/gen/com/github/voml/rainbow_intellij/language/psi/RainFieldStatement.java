@@ -11,6 +11,6 @@ public interface RainFieldStatement extends PsiElement {
   RainKey getKey();
 
   @NotNull
-  List<RainValue> getValueList();
+  RainValue getValue();
 
 }

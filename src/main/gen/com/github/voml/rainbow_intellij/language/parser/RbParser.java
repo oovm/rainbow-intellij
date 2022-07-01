@@ -60,6 +60,46 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // key eq (object_inherit|value+)
+  public static boolean attribute_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_statement")) return false;
+    if (!nextTokenIs(b, "<attribute statement>", STRING_RAW, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, ATTRIBUTE_STATEMENT, "<attribute statement>");
+    r = key(b, l + 1);
+    r = r && eq(b, l + 1);
+    r = r && attribute_statement_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // object_inherit|value+
+  private static boolean attribute_statement_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_statement_2")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = object_inherit(b, l + 1);
+    if (!r) r = attribute_statement_2_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // value+
+  private static boolean attribute_statement_2_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "attribute_statement_2_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = value(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!value(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "attribute_statement_2_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // "true" | "false"
   public static boolean boolean_$(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "boolean_$")) return false;
@@ -207,7 +247,7 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // key eq value+
+  // key eq value
   public static boolean field_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "field_statement")) return false;
     if (!nextTokenIs(b, "<field statement>", STRING_RAW, SYMBOL)) return false;
@@ -215,34 +255,19 @@ public class RbParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, FIELD_STATEMENT, "<field statement>");
     r = key(b, l + 1);
     r = r && eq(b, l + 1);
-    r = r && field_statement_2(b, l + 1);
+    r = r && value(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // value+
-  private static boolean field_statement_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "field_statement_2")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = value(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!value(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "field_statement_2", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
   /* ********************************************************** */
-  // "global" <<brace_block field_statement ignore>>
+  // "global" <<brace_block attribute_statement ignore>>
   public static boolean global_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "global_statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, GLOBAL_STATEMENT, "<global statement>");
     r = consumeToken(b, "global");
-    r = r && brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
+    r = r && brace_block(b, l + 1, RbParser::attribute_statement, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -271,38 +296,15 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STRING_RAW | SYMBOL
+  // string_inline | identifier
   public static boolean key(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "key")) return false;
     if (!nextTokenIs(b, "<key>", STRING_RAW, SYMBOL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, KEY, "<key>");
-    r = consumeToken(b, STRING_RAW);
-    if (!r) r = consumeToken(b, SYMBOL);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // (string_inline|SYMBOL) eq value
-  public static boolean kv_pair(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kv_pair")) return false;
-    if (!nextTokenIs(b, "<kv pair>", STRING_RAW, SYMBOL)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, KV_PAIR, "<kv pair>");
-    r = kv_pair_0(b, l + 1);
-    r = r && eq(b, l + 1);
-    r = r && value(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // string_inline|SYMBOL
-  private static boolean kv_pair_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "kv_pair_0")) return false;
-    boolean r;
     r = string_inline(b, l + 1);
-    if (!r) r = consumeToken(b, SYMBOL);
+    if (!r) r = identifier(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -319,7 +321,7 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "language" identifier [COLON language_inherit] <<brace_block field_statement ignore>>
+  // "language" identifier [COLON language_inherit] <<brace_block attribute_statement ignore>>
   public static boolean language_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "language_statement")) return false;
     boolean r;
@@ -327,7 +329,7 @@ public class RbParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, "language");
     r = r && identifier(b, l + 1);
     r = r && language_statement_2(b, l + 1);
-    r = r && brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
+    r = r && brace_block(b, l + 1, RbParser::attribute_statement, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -351,13 +353,13 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "meta" <<brace_block field_statement ignore>>
+  // "meta" <<brace_block attribute_statement ignore>>
   public static boolean meta_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "meta_statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, META_STATEMENT, "<meta statement>");
     r = consumeToken(b, "meta");
-    r = r && brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
+    r = r && brace_block(b, l + 1, RbParser::attribute_statement, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -466,15 +468,35 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<brace_block kv_pair ignore>>
+  // <<brace_block field_statement ignore>>
   public static boolean object(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "object")) return false;
     if (!nextTokenIs(b, BRACE_L)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = brace_block(b, l + 1, RbParser::kv_pair, RbParser::ignore);
+    r = brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
     exit_section_(b, m, OBJECT, r);
     return r;
+  }
+
+  /* ********************************************************** */
+  // namespace? object
+  public static boolean object_inherit(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_inherit")) return false;
+    if (!nextTokenIs(b, "<object inherit>", BRACE_L, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OBJECT_INHERIT, "<object inherit>");
+    r = object_inherit_0(b, l + 1);
+    r = r && object(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // namespace?
+  private static boolean object_inherit_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "object_inherit_0")) return false;
+    namespace(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -492,14 +514,14 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "schema" identifier <<brace_block field_statement ignore>>
+  // "schema" identifier <<brace_block attribute_statement ignore>>
   public static boolean schema_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "schema_statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SCHEMA_STATEMENT, "<schema statement>");
     r = consumeToken(b, "schema");
     r = r && identifier(b, l + 1);
-    r = r && brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
+    r = r && brace_block(b, l + 1, RbParser::attribute_statement, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -573,13 +595,12 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // array | object | data | namespace
+  // array | data | namespace
   public static boolean value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VALUE, "<value>");
     r = array(b, l + 1);
-    if (!r) r = object(b, l + 1);
     if (!r) r = data(b, l + 1);
     if (!r) r = namespace(b, l + 1);
     exit_section_(b, l, m, r, false, null);

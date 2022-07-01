@@ -9,6 +9,7 @@ import com.github.voml.rainbow_intellij.language.psi_node.*;
 public interface RbToken {
 
   IElementType ARRAY = new RbElementType("ARRAY");
+  IElementType ATTRIBUTE_STATEMENT = new RbElementType("ATTRIBUTE_STATEMENT");
   IElementType BOOLEAN = new RbElementType("BOOLEAN");
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
   IElementType BRACKET_BLOCK = new RbElementType("BRACKET_BLOCK");
@@ -17,7 +18,6 @@ public interface RbToken {
   IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
   IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
   IElementType KEY = new RbElementType("KEY");
-  IElementType KV_PAIR = new RbElementType("KV_PAIR");
   IElementType LANGUAGE_INHERIT = new RbElementType("LANGUAGE_INHERIT");
   IElementType LANGUAGE_STATEMENT = new RbElementType("LANGUAGE_STATEMENT");
   IElementType META_STATEMENT = new RbElementType("META_STATEMENT");
@@ -25,6 +25,7 @@ public interface RbToken {
   IElementType NULL = new RbElementType("NULL");
   IElementType NUMBER = new RbElementType("NUMBER");
   IElementType OBJECT = new RbElementType("OBJECT");
+  IElementType OBJECT_INHERIT = new RbElementType("OBJECT_INHERIT");
   IElementType SCHEMA_STATEMENT = new RbElementType("SCHEMA_STATEMENT");
   IElementType STRING = new RbElementType("STRING");
   IElementType STRING_INLINE = new RbElementType("STRING_INLINE");
@@ -67,6 +68,9 @@ public interface RbToken {
       if (type == ARRAY) {
         return new RainArrayNode(node);
       }
+      else if (type == ATTRIBUTE_STATEMENT) {
+        return new RainAttributeStatementNode(node);
+      }
       else if (type == BOOLEAN) {
         return new RainBooleanNode(node);
       }
@@ -91,9 +95,6 @@ public interface RbToken {
       else if (type == KEY) {
         return new RainKeyNode(node);
       }
-      else if (type == KV_PAIR) {
-        return new RainKvPairNode(node);
-      }
       else if (type == LANGUAGE_INHERIT) {
         return new RainLanguageInheritNode(node);
       }
@@ -114,6 +115,9 @@ public interface RbToken {
       }
       else if (type == OBJECT) {
         return new RainObjectNode(node);
+      }
+      else if (type == OBJECT_INHERIT) {
+        return new RainObjectInheritNode(node);
       }
       else if (type == SCHEMA_STATEMENT) {
         return new RainSchemaStatementNode(node);

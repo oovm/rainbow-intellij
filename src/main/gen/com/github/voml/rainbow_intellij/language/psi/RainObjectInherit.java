@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainKey extends PsiElement {
+public interface RainObjectInherit extends PsiElement {
 
   @Nullable
-  RainIdentifier getIdentifier();
+  RainNamespace getNamespace();
 
-  @Nullable
-  RainStringInline getStringInline();
+  @NotNull
+  RainObject getObject();
 
 }

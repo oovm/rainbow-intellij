@@ -8,7 +8,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 
-class JssSyntaxHighlighter : SyntaxHighlighterBase() {
+class RbTokenHighlighter : SyntaxHighlighterBase() {
     override fun getHighlightingLexer(): Lexer {
         return RbLexerAdapter()
     }
@@ -32,8 +32,9 @@ class JssSyntaxHighlighter : SyntaxHighlighterBase() {
             INTEGER -> RainbowColor.INTEGER
             DECIMAL -> RainbowColor.DECIMAL
             URL -> RainbowColor.URL
-            STRING -> RainbowColor.STRING
+            STRING, STRING_RAW -> RainbowColor.STRING
             SYMBOL -> RainbowColor.IDENTIFIER
+            COLOR_LITERAL -> RainbowColor.COLOR
             // 注释
             COMMENT -> RainbowColor.LINE_COMMENT
             COMMENT_BLOCK -> RainbowColor.BLOCK_COMMENT

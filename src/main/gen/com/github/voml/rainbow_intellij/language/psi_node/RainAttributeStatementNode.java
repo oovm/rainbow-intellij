@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.voml.rainbow_intellij.language.psi.RbToken.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.github.voml.rainbow_intellij.language.mixin.MixinAttribute;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainKeyNode extends ASTWrapperPsiElement implements RainKey {
+public class RainAttributeStatementNode extends MixinAttribute implements RainAttributeStatement {
 
-  public RainKeyNode(@NotNull ASTNode node) {
+  public RainAttributeStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitKey(this);
+    visitor.visitAttributeStatement(this);
   }
 
   @Override
@@ -29,15 +29,21 @@ public class RainKeyNode extends ASTWrapperPsiElement implements RainKey {
   }
 
   @Override
-  @Nullable
-  public RainIdentifier getIdentifier() {
-    return findChildByClass(RainIdentifier.class);
+  @NotNull
+  public RainKey getKey() {
+    return findNotNullChildByClass(RainKey.class);
   }
 
   @Override
   @Nullable
-  public RainStringInline getStringInline() {
-    return findChildByClass(RainStringInline.class);
+  public RainObjectInherit getObjectInherit() {
+    return findChildByClass(RainObjectInherit.class);
+  }
+
+  @Override
+  @NotNull
+  public List<RainValue> getValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RainValue.class);
   }
 
 }

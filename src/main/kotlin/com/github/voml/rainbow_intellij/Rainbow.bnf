@@ -66,35 +66,44 @@ private statement ::=
 private ignore ::= SEMICOLON | COMMA;
 // ---------------------------------------------------------------------------------------------------------------------
 // schema <ID>: <TYPE> { }
-schema_statement ::= "schema" identifier <<brace_block field_statement ignore>> {
+schema_statement ::= "schema" identifier <<brace_block attribute_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinSchema"
     methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-meta_statement ::= "meta" <<brace_block field_statement ignore>> {
+meta_statement ::= "meta" <<brace_block attribute_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
     methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-global_statement ::= "global" <<brace_block field_statement ignore>> {
+global_statement ::= "global" <<brace_block attribute_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinGlobal"
     methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-language_statement ::= "language" identifier [COLON language_inherit] <<brace_block field_statement ignore>> {
+language_statement ::= "language" identifier [COLON language_inherit] <<brace_block attribute_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinLanguage"
     methods = [getKeyword]
 };
 language_inherit ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 // properties <ID>: <TYPE> { }
-field_statement ::= key eq value+ {
+attribute_statement ::= key eq (object_inherit|value+) {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinAttribute"
+};
+field_statement ::= key eq value {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinField"
 };
-key ::= STRING_RAW | SYMBOL;
+// ---------------------------------------------------------------------------------------------------------------------
+array ::= <<bracket_block value ignore>>;
+object ::= <<brace_block field_statement ignore>>;
+// ---------------------------------------------------------------------------------------------------------------------
+key ::= string_inline | identifier;
 private eq ::= EQ | COLON;
-value ::= array | object | data | namespace;
+value ::= array | data | namespace;
 private data ::= null | boolean | number | string | color | url_maybe_valid;
+// ---------------------------------------------------------------------------------------------------------------------
+object_inherit ::= namespace? object;
 // ---------------------------------------------------------------------------------------------------------------------
 null ::= "null";
 boolean ::= "true" | "false";
@@ -107,10 +116,6 @@ number ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
 string ::= (string_inline|string_multi);
 string_inline ::= STRING_RAW;
 string_multi ::= STRING_RAW;
-// ---------------------------------------------------------------------------------------------------------------------
-array ::= <<bracket_block value ignore>>;
-object ::= <<brace_block kv_pair ignore>>;
-kv_pair ::= (string_inline|SYMBOL) eq value;
 // ---------------------------------------------------------------------------------------------------------------------
 namespace  ::= identifier (DOT identifier)*;
 identifier ::= SYMBOL;

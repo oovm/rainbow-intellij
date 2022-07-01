@@ -36,8 +36,8 @@ public class RainFieldStatementNode extends MixinField implements RainFieldState
 
   @Override
   @NotNull
-  public List<RainValue> getValueList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, RainValue.class);
+  public RainValue getValue() {
+    return findNotNullChildByClass(RainValue.class);
   }
 
 }
