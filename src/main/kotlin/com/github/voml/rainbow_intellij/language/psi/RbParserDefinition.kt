@@ -35,8 +35,8 @@ class RbParserDefinition : ParserDefinition {
     }
 
     companion object {
-        val COMMENTS = TokenSet.create(RbToken.COMMENT, RbToken.COMMENT_BLOCK)
-        val STRING_LITERALS = TokenSet.create(RbToken.STRING_INLINE, RbToken.STRING_MULTI)
+        val COMMENTS = TokenSet.create(RbToken.COMMENT, RbToken.COMMENT_BLOCK, RbToken.COMMENT_DOCUMENT)
+        val STRING_LITERALS = TokenSet.create(RbToken.STRING)
         val FILE = IFileElementType(RainbowLanguage.INSTANCE)
     }
 }

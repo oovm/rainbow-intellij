@@ -28,15 +28,16 @@ WHITE_SPACE=\s+
 COMMENT_DOCUMENT=("///")[^\r\n]*
 COMMENT=("//")[^\r\n]*
 COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
-URL= [A-Za-z0-9]+:"//"[\-\p{XID_Continue}./?&#]+
 SYMBOL=[\p{XID_Start}_][\p{XID_Continue}_-]*
-MACRO = @{SYMBOL}
 COLOR=[#][0-9a-fA-F]+
-STRING_RAW=\"([^\"\\]|\\.)*\"
-BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
+STRING=\"([^\"\\]|\\.)*\"
 INTEGER=(0|[1-9][0-9_]*)
 DECIMAL=([0-9]+\.[0-9]*([*][*][0-9]+)?)|(\.[0-9]+([Ee][0-9]+)?)
 SIGN=[+-]
+
+MACRO = @{SYMBOL}
+URL= [A-Za-z0-9]+:"//"[\-\p{XID_Continue}./?&#]+
+BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
 
 %%
 <YYINITIAL> {
@@ -66,12 +67,9 @@ SIGN=[+-]
 	{COMMENT_DOCUMENT}    { return COMMENT_DOCUMENT; }
 	{COMMENT}             { return COMMENT; }
 	{COMMENT_BLOCK}       { return COMMENT_BLOCK; }
-	{URL}                 { return URL; }
-	{MACRO}               { return MACRO; }
 	{SYMBOL}              { return SYMBOL; }
-	{STRING_RAW}          { return STRING_RAW; }
-	{COLOR}               { return COLOR_LITERAL; }
-	{BYTE}                { return BYTE; }
+	{STRING}              { return STRING; }
+	{COLOR}               { return COLOR; }
 	{INTEGER}             { return INTEGER; }
 	{DECIMAL}             { return DECIMAL; }
 	{SIGN}                { return SIGN; }

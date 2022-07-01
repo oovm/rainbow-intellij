@@ -23,6 +23,10 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitColorLiteral(@NotNull RainColorLiteral o) {
+    visitPsiElement(o);
+  }
+
   public void visitFieldStatement(@NotNull RainFieldStatement o) {
     visitPsiElement(o);
   }
@@ -75,15 +79,7 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitString(@NotNull RainString o) {
-    visitPsiElement(o);
-  }
-
-  public void visitStringInline(@NotNull RainStringInline o) {
-    visitPsiElement(o);
-  }
-
-  public void visitStringMulti(@NotNull RainStringMulti o) {
+  public void visitStringLiteral(@NotNull RainStringLiteral o) {
     visitPsiElement(o);
   }
 

@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainStringInlineNode extends ASTWrapperPsiElement implements RainStringInline {
+public class RainColorLiteralNode extends ASTWrapperPsiElement implements RainColorLiteral {
 
-  public RainStringInlineNode(@NotNull ASTNode node) {
+  public RainColorLiteralNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitStringInline(this);
+    visitor.visitColorLiteral(this);
   }
 
   @Override

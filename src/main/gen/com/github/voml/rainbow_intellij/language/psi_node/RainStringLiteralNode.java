@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainUrlMaybeValidNode extends ASTWrapperPsiElement implements RainUrlMaybeValid {
+public class RainStringLiteralNode extends ASTWrapperPsiElement implements RainStringLiteral {
 
-  public RainUrlMaybeValidNode(@NotNull ASTNode node) {
+  public RainStringLiteralNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitUrlMaybeValid(this);
+    visitor.visitStringLiteral(this);
   }
 
   @Override

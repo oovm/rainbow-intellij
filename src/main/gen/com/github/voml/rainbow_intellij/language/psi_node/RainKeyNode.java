@@ -36,8 +36,8 @@ public class RainKeyNode extends ASTWrapperPsiElement implements RainKey {
 
   @Override
   @Nullable
-  public RainStringInline getStringInline() {
-    return findChildByClass(RainStringInline.class);
+  public RainStringLiteral getStringLiteral() {
+    return findChildByClass(RainStringLiteral.class);
   }
 
 }

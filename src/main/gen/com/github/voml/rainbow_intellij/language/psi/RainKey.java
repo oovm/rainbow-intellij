@@ -11,6 +11,6 @@ public interface RainKey extends PsiElement {
   RainIdentifier getIdentifier();
 
   @Nullable
-  RainStringInline getStringInline();
+  RainStringLiteral getStringLiteral();
 
 }

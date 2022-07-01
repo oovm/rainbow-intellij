@@ -25,9 +25,9 @@
         // literal
         URL = 'Url'
         SYMBOL = 'Symbol'
-        STRING_RAW = 'String'
+        STRING = 'String'
+        COLOR = 'Color'
 
-        BYTE = 'Byte'
         INTEGER = 'Integer'
         DECIMAL = 'Decimal'
         SIGN = 'regexp:[+-]'
@@ -65,13 +65,12 @@ private statement ::=
   | ignore;
 private ignore ::= SEMICOLON | COMMA;
 // ---------------------------------------------------------------------------------------------------------------------
-// schema <ID>: <TYPE> { }
 schema_statement ::= "schema" identifier <<brace_block attribute_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinSchema"
     methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-meta_statement ::= "meta" <<brace_block attribute_statement ignore>> {
+meta_statement ::= "meta" <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
     methods = [getKeyword]
 };
@@ -98,22 +97,19 @@ field_statement ::= key eq value {
 array ::= <<bracket_block value ignore>>;
 object ::= <<brace_block field_statement ignore>>;
 // ---------------------------------------------------------------------------------------------------------------------
-key ::= string_inline | identifier;
+key ::= string_literal | identifier;
 private eq ::= EQ | COLON;
 value ::= array | data | namespace;
-private data ::= null | boolean | number | string | literal;
+private data ::= literal | string_literal | color_literal | number;
 // ---------------------------------------------------------------------------------------------------------------------
 object_inherit ::= namespace? object;
 // ---------------------------------------------------------------------------------------------------------------------
-number ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
-// ---------------------------------------------------------------------------------------------------------------------
-string ::= (string_inline|string_multi);
-string_inline ::= STRING_RAW;
-string_multi ::= STRING_RAW;
-// ---------------------------------------------------------------------------------------------------------------------
+number ::= [SIGN] (INTEGER | DECIMAL);
 namespace  ::= identifier (DOT identifier)*;
 identifier ::= SYMBOL;
-literal    ::= COLOR | MACRO | "true" | "false" | "null";
+color_literal ::= COLOR;
+string_literal ::= STRING_RAW;
+literal ::= "true" | "false" | "null";
 // ---------------------------------------------------------------------------------------------------------------------
 // parenthesis ( )
 private meta parenthesis ::= PARENTHESIS_L <<param>> PARENTHESIS_R;

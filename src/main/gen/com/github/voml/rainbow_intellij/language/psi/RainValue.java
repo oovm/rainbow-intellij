@@ -11,6 +11,9 @@ public interface RainValue extends PsiElement {
   RainArray getArray();
 
   @Nullable
+  RainColorLiteral getColorLiteral();
+
+  @Nullable
   RainLiteral getLiteral();
 
   @Nullable
@@ -20,6 +23,6 @@ public interface RainValue extends PsiElement {
   RainNumber getNumber();
 
   @Nullable
-  RainString getString();
+  RainStringLiteral getStringLiteral();
 
 }

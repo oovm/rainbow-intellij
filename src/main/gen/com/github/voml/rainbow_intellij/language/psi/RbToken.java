@@ -12,6 +12,7 @@ public interface RbToken {
   IElementType ATTRIBUTE_STATEMENT = new RbElementType("ATTRIBUTE_STATEMENT");
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
   IElementType BRACKET_BLOCK = new RbElementType("BRACKET_BLOCK");
+  IElementType COLOR_LITERAL = new RbElementType("COLOR_LITERAL");
   IElementType FIELD_STATEMENT = new RbElementType("FIELD_STATEMENT");
   IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
   IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
@@ -25,23 +26,19 @@ public interface RbToken {
   IElementType OBJECT = new RbElementType("OBJECT");
   IElementType OBJECT_INHERIT = new RbElementType("OBJECT_INHERIT");
   IElementType SCHEMA_STATEMENT = new RbElementType("SCHEMA_STATEMENT");
-  IElementType STRING = new RbElementType("STRING");
-  IElementType STRING_INLINE = new RbElementType("STRING_INLINE");
-  IElementType STRING_MULTI = new RbElementType("STRING_MULTI");
+  IElementType STRING_LITERAL = new RbElementType("STRING_LITERAL");
   IElementType VALUE = new RbElementType("VALUE");
 
   IElementType ACCENT = new RbTokenType("^");
   IElementType ANGLE_L = new RbTokenType("<");
   IElementType ANGLE_R = new RbTokenType(">");
   IElementType AT = new RbTokenType("@");
-  IElementType BOOLEAN = new RbTokenType("boolean");
   IElementType BRACE_L = new RbTokenType("{");
   IElementType BRACE_R = new RbTokenType("}");
   IElementType BRACKET_L = new RbTokenType("[");
   IElementType BRACKET_R = new RbTokenType("]");
-  IElementType BYTE = new RbTokenType("Byte");
   IElementType COLON = new RbTokenType(":");
-  IElementType COLOR = new RbTokenType("COLOR");
+  IElementType COLOR = new RbTokenType("Color");
   IElementType COMMA = new RbTokenType(",");
   IElementType COMMENT = new RbTokenType("Comment");
   IElementType COMMENT_BLOCK = new RbTokenType("Comment Block");
@@ -51,14 +48,13 @@ public interface RbToken {
   IElementType DOT = new RbTokenType(".");
   IElementType EQ = new RbTokenType("=");
   IElementType INTEGER = new RbTokenType("Integer");
-  IElementType MACRO = new RbTokenType("MACRO");
-  IElementType NULL = new RbTokenType("null");
   IElementType PARENTHESIS_L = new RbTokenType("(");
   IElementType PARENTHESIS_R = new RbTokenType(")");
   IElementType SEMICOLON = new RbTokenType(";");
   IElementType SIGN = new RbTokenType("SIGN");
   IElementType STAR = new RbTokenType("*");
-  IElementType STRING_RAW = new RbTokenType("String");
+  IElementType STRING = new RbTokenType("String");
+  IElementType STRING_RAW = new RbTokenType("STRING_RAW");
   IElementType SYMBOL = new RbTokenType("Symbol");
   IElementType URL = new RbTokenType("Url");
 
@@ -76,6 +72,9 @@ public interface RbToken {
       }
       else if (type == BRACKET_BLOCK) {
         return new RainBracketBlockNode(node);
+      }
+      else if (type == COLOR_LITERAL) {
+        return new RainColorLiteralNode(node);
       }
       else if (type == FIELD_STATEMENT) {
         return new RainFieldStatementNode(node);
@@ -116,14 +115,8 @@ public interface RbToken {
       else if (type == SCHEMA_STATEMENT) {
         return new RainSchemaStatementNode(node);
       }
-      else if (type == STRING) {
-        return new RainStringNode(node);
-      }
-      else if (type == STRING_INLINE) {
-        return new RainStringInlineNode(node);
-      }
-      else if (type == STRING_MULTI) {
-        return new RainStringMultiNode(node);
+      else if (type == STRING_LITERAL) {
+        return new RainStringLiteralNode(node);
       }
       else if (type == VALUE) {
         return new RainValueNode(node);

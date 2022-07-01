@@ -36,6 +36,12 @@ public class RainValueNode extends ASTWrapperPsiElement implements RainValue {
 
   @Override
   @Nullable
+  public RainColorLiteral getColorLiteral() {
+    return findChildByClass(RainColorLiteral.class);
+  }
+
+  @Override
+  @Nullable
   public RainLiteral getLiteral() {
     return findChildByClass(RainLiteral.class);
   }
@@ -54,8 +60,8 @@ public class RainValueNode extends ASTWrapperPsiElement implements RainValue {
 
   @Override
   @Nullable
-  public RainString getString() {
-    return findChildByClass(RainString.class);
+  public RainStringLiteral getStringLiteral() {
+    return findChildByClass(RainStringLiteral.class);
   }
 
 }
