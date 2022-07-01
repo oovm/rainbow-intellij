@@ -13,8 +13,7 @@ public interface RainGlobalStatement extends PsiElement {
   @NotNull
   RainIdentifier getIdentifier();
 
-  //WARNING: getGlobal(...) is skipped
-  //matching getGlobal(RainGlobalStatement, ...)
-  //methods are not found in RainAstExtension
+  @NotNull
+  RainIdentifier getGlobal();
 
 }

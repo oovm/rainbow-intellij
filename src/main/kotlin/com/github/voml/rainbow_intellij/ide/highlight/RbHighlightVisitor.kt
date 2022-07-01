@@ -9,12 +9,20 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
-class JssHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
+class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun visitSchemaStatement(o: RainSchemaStatement) {
         highlight(o.schema, RainbowColor.KEYWORD)
         highlight(o.identifier, RainbowColor.SYM_SCHEMA)
+    }
+
+    override fun visitMetaStatement(o: RainMetaStatement) {
+        highlight(o.meta, RainbowColor.KEYWORD)
+    }
+
+    override fun visitGlobalStatement(o: RainGlobalStatement) {
+        highlight(o.global, RainbowColor.KEYWORD)
     }
 
     private fun highlight(element: PsiElement, color: RainbowColor) {
@@ -36,7 +44,7 @@ class JssHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
         return true
     }
 
-    override fun clone(): HighlightVisitor = JssHighlightVisitor()
+    override fun clone(): HighlightVisitor = RbHighlightVisitor()
 
     override fun suitableForFile(file: PsiFile): Boolean = file is RainbowFile
 

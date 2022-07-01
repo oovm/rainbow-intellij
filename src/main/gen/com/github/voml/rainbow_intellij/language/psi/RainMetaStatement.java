@@ -13,8 +13,7 @@ public interface RainMetaStatement extends PsiElement {
   @NotNull
   RainIdentifier getIdentifier();
 
-  //WARNING: getMeta(...) is skipped
-  //matching getMeta(RainMetaStatement, ...)
-  //methods are not found in RainAstExtension
+  @NotNull
+  RainIdentifier getMeta();
 
 }
