@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.voml.rainbow_intellij.language.psi.RbToken.*;
-import com.github.voml.rainbow_intellij.language.mixin.MixinSchema;
+import com.github.voml.rainbow_intellij.language.mixin.MixinMeta;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainSchemaStatementNode extends MixinSchema implements RainSchemaStatement {
+public class RainMetaStatementNode extends MixinMeta implements RainMetaStatement {
 
-  public RainSchemaStatementNode(@NotNull ASTNode node) {
+  public RainMetaStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitSchemaStatement(this);
+    visitor.visitMetaStatement(this);
   }
 
   @Override
@@ -38,12 +38,6 @@ public class RainSchemaStatementNode extends MixinSchema implements RainSchemaSt
   @NotNull
   public RainIdentifier getIdentifier() {
     return findNotNullChildByClass(RainIdentifier.class);
-  }
-
-  @Override
-  @NotNull
-  public RainIdentifier getSchema() {
-    return RainAstExtension.getSchema(this);
   }
 
 }

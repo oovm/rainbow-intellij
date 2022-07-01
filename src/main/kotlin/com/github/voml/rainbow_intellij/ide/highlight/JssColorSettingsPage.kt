@@ -6,11 +6,11 @@ import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
 
 class JssColorSettingsPage : ColorSettingsPage {
-    private val annotatorTags = Color
+    private val annotatorTags = RainbowColor
         .values()
         .associateBy({ it.name }, { it.textAttributesKey })
 
-    override fun getAttributeDescriptors() = Color
+    override fun getAttributeDescriptors() = RainbowColor
         .values()
         .map { it.attributesDescriptor }
         .toTypedArray()

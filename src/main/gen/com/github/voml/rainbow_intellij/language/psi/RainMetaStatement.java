@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainSchemaStatement extends PsiElement {
+public interface RainMetaStatement extends PsiElement {
 
   @NotNull
   RainBraceBlock getBraceBlock();
@@ -13,7 +13,8 @@ public interface RainSchemaStatement extends PsiElement {
   @NotNull
   RainIdentifier getIdentifier();
 
-  @NotNull
-  RainIdentifier getSchema();
+  //WARNING: getMeta(...) is skipped
+  //matching getMeta(RainMetaStatement, ...)
+  //methods are not found in RainAstExtension
 
 }

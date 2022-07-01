@@ -244,6 +244,31 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // "global" identifier <<brace_block properties_inner ignore>>
+  public static boolean global_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "global_statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, GLOBAL_STATEMENT, "<global statement>");
+    r = consumeToken(b, "global");
+    r = r && identifier(b, l + 1);
+    r = r && brace_block(b, l + 1, RbParser::properties_inner, RbParser::ignore);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SYMBOL
+  public static boolean identifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identifier")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, SYMBOL);
+    exit_section_(b, m, IDENTIFIER, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // DOLLAR
   public static boolean idiom_mark(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "idiom_mark")) return false;
@@ -320,6 +345,19 @@ public class RbParser implements PsiParser, LightPsiParser {
     boolean r;
     r = string_inline(b, l + 1);
     if (!r) r = consumeToken(b, SYMBOL);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // "meta" identifier <<brace_block properties_inner ignore>>
+  public static boolean meta_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "meta_statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, META_STATEMENT, "<meta statement>");
+    r = consumeToken(b, "meta");
+    r = r && identifier(b, l + 1);
+    r = r && brace_block(b, l + 1, RbParser::properties_inner, RbParser::ignore);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -534,24 +572,16 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "schema" SYMBOL [type_hint] <<brace_block properties_inner ignore>>
+  // "schema" identifier <<brace_block properties_inner ignore>>
   public static boolean schema_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "schema_statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, SCHEMA_STATEMENT, "<schema statement>");
     r = consumeToken(b, "schema");
-    r = r && consumeToken(b, SYMBOL);
-    r = r && schema_statement_2(b, l + 1);
+    r = r && identifier(b, l + 1);
     r = r && brace_block(b, l + 1, RbParser::properties_inner, RbParser::ignore);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  // [type_hint]
-  private static boolean schema_statement_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "schema_statement_2")) return false;
-    type_hint(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -562,19 +592,17 @@ public class RbParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // schema_statement
-  //   | properties_statement
-  //   | def_statement
+  //   | meta_statement
+  //   | global_statement
   //   | COMMENT_DOCUMENT
-  //   | object
   //   | ignore
   static boolean statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement")) return false;
     boolean r;
     r = schema_statement(b, l + 1);
-    if (!r) r = properties_statement(b, l + 1);
-    if (!r) r = def_statement(b, l + 1);
+    if (!r) r = meta_statement(b, l + 1);
+    if (!r) r = global_statement(b, l + 1);
     if (!r) r = consumeToken(b, COMMENT_DOCUMENT);
-    if (!r) r = object(b, l + 1);
     if (!r) r = ignore(b, l + 1);
     return r;
   }

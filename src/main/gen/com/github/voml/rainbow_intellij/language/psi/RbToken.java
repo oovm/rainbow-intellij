@@ -14,10 +14,13 @@ public interface RbToken {
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
   IElementType BRACKET_BLOCK = new RbElementType("BRACKET_BLOCK");
   IElementType DEF_STATEMENT = new RbElementType("DEF_STATEMENT");
+  IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
+  IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
   IElementType IDIOM_MARK = new RbElementType("IDIOM_MARK");
   IElementType IDIOM_STATEMENT = new RbElementType("IDIOM_STATEMENT");
   IElementType IDIOM_SYMBOL = new RbElementType("IDIOM_SYMBOL");
   IElementType KV_PAIR = new RbElementType("KV_PAIR");
+  IElementType META_STATEMENT = new RbElementType("META_STATEMENT");
   IElementType NULL = new RbElementType("NULL");
   IElementType OBJECT = new RbElementType("OBJECT");
   IElementType PROPERTIES_BLOCK = new RbElementType("PROPERTIES_BLOCK");
@@ -80,6 +83,12 @@ public interface RbToken {
       else if (type == DEF_STATEMENT) {
         return new RainDefStatementNode(node);
       }
+      else if (type == GLOBAL_STATEMENT) {
+        return new RainGlobalStatementNode(node);
+      }
+      else if (type == IDENTIFIER) {
+        return new RainIdentifierNode(node);
+      }
       else if (type == IDIOM_MARK) {
         return new RainIdiomMarkNode(node);
       }
@@ -91,6 +100,9 @@ public interface RbToken {
       }
       else if (type == KV_PAIR) {
         return new RainKvPairNode(node);
+      }
+      else if (type == META_STATEMENT) {
+        return new RainMetaStatementNode(node);
       }
       else if (type == NULL) {
         return new RainNullNode(node);

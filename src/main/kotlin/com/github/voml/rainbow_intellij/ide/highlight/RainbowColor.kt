@@ -11,8 +11,8 @@ import java.util.function.Supplier
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors as Default
 
 
-// TODO: 分类
-enum class Color(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, default: TextAttributesKey? = null) {
+@Suppress("UnstableApiUsage")
+enum class RainbowColor(humanName: Supplier<@NlsContexts.AttributeDescriptor String>, default: TextAttributesKey? = null) {
     // 特殊关键词
     KEYWORD(OptionsBundle.messagePointer("options.language.defaults.keyword"), Default.KEYWORD),
     IDIOM_SYMBOL(RainbowBundle.messagePointer("color.token.symbol.idiom"), Default.METADATA),

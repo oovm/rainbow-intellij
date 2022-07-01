@@ -12,7 +12,12 @@ import com.intellij.psi.PsiFile
 class JssHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
-    private fun highlight(element: PsiElement, color: Color) {
+    override fun visitSchemaStatement(o: RainSchemaStatement) {
+        highlight(o.schema, RainbowColor.KEYWORD)
+        highlight(o.identifier, RainbowColor.SYM_SCHEMA)
+    }
+
+    private fun highlight(element: PsiElement, color: RainbowColor) {
         val builder = HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION)
         builder.textAttributes(color.textAttributesKey)
         builder.range(element)

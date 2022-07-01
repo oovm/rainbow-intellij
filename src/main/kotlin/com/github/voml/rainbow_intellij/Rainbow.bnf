@@ -58,15 +58,27 @@ Rb ::= statement*;
 
 private statement ::=
     schema_statement
-  | properties_statement
-  | def_statement
+  | meta_statement
+  | global_statement
   | COMMENT_DOCUMENT
-  | object
   | ignore;
 private ignore ::= SEMICOLON | COMMA;
 // ---------------------------------------------------------------------------------------------------------------------
 // schema <ID>: <TYPE> { }
-schema_statement ::= "schema" SYMBOL [type_hint] <<brace_block properties_inner ignore>>;
+schema_statement ::= "schema" identifier <<brace_block properties_inner ignore>> {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinSchema"
+    methods = [getSchema]
+};
+// ---------------------------------------------------------------------------------------------------------------------
+meta_statement ::= "meta" identifier <<brace_block properties_inner ignore>> {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
+    methods = [getMeta]
+};
+// ---------------------------------------------------------------------------------------------------------------------
+global_statement ::= "global" identifier <<brace_block properties_inner ignore>> {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinGlobal"
+    methods = [getGlobal]
+};
 // ---------------------------------------------------------------------------------------------------------------------
 // properties <ID>: <TYPE> { }
 properties_statement ::= ("properties" | "property" | "prop"| "field" | DOT) properties_key [type_hint] [properties_block];
@@ -120,6 +132,8 @@ string_multi ::= STRING;
 array ::= <<bracket_block value ignore>>;
 object ::= <<brace_block kv_pair ignore>>;
 kv_pair ::= (string_inline|SYMBOL) eq value;
+// ---------------------------------------------------------------------------------------------------------------------
+identifier ::= SYMBOL;
 // ---------------------------------------------------------------------------------------------------------------------
 // parenthesis ( )
 private meta parenthesis ::= PARENTHESIS_L <<param>> PARENTHESIS_R;

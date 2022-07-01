@@ -31,6 +31,14 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitGlobalStatement(@NotNull RainGlobalStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitIdentifier(@NotNull RainIdentifier o) {
+    visitPsiElement(o);
+  }
+
   public void visitIdiomMark(@NotNull RainIdiomMark o) {
     visitPsiElement(o);
   }
@@ -44,6 +52,10 @@ public class RainVisitor extends PsiElementVisitor {
   }
 
   public void visitKvPair(@NotNull RainKvPair o) {
+    visitPsiElement(o);
+  }
+
+  public void visitMetaStatement(@NotNull RainMetaStatement o) {
     visitPsiElement(o);
   }
 
