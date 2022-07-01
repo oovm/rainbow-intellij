@@ -9,7 +9,7 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
-class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
+class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun visitSchemaStatement(o: RainSchemaStatement) {
@@ -25,8 +25,8 @@ class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
         highlight(o.keyword, RainbowColor.KEYWORD)
     }
 
-    override fun visitFieldStatement(o: RainFieldStatement) {
-        highlight(o.key, RainbowColor.SYM_FIELD)
+    override fun visitKey(o: RainKey) {
+        highlight(o, RainbowColor.SYM_FIELD)
     }
 
     override fun visitLanguageStatement(o: RainLanguageStatement) {
@@ -50,14 +50,14 @@ class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
         file: PsiFile,
         updateWholeFile: Boolean,
         holder: HighlightInfoHolder,
-        action: Runnable
+        action: Runnable,
     ): Boolean {
         infoHolder = holder
         action.run()
         return true
     }
 
-    override fun clone(): HighlightVisitor = RbHighlightVisitor()
+    override fun clone(): HighlightVisitor = RbNodeHighlighter()
 
     override fun suitableForFile(file: PsiFile): Boolean = file is RainbowFile
 

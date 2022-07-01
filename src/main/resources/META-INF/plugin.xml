@@ -20,11 +20,12 @@
 			implementationClass="com.github.voml.rainbow_intellij.language.psi.RbParserDefinition"
 		/>
 		<projectViewNestingRulesProvider implementation="com.github.voml.rainbow_intellij.file.RainbowFileGroup"/>
+<!--		<structureViewBuilder key="BEAM" factoryClass="com.github.voml.rainbow_intellij.ide.view.RbDescriptionProvider"/>-->
 		<!-- Highlight -->
 		<additionalTextAttributes scheme="Default" file="colors/JssDefault.xml"/>
 		<additionalTextAttributes scheme="Darcula" file="colors/JssDarcula.xml"/>
 		<colorSettingsPage implementation="com.github.voml.rainbow_intellij.ide.highlight.JssColorSettingsPage"/>
-		<highlightVisitor implementation="com.github.voml.rainbow_intellij.ide.highlight.RbHighlightVisitor"/>
+		<highlightVisitor implementation="com.github.voml.rainbow_intellij.ide.highlight.RbNodeHighlighter"/>
 		<lang.syntaxHighlighter
 			language="Rainbow"
 			implementationClass="com.github.voml.rainbow_intellij.ide.highlight.RbTokenHighlighter"

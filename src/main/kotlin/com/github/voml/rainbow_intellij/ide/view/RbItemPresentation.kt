@@ -7,3 +7,4 @@ class RbItemPresentation(private val icon: Icon, private val text: String): Item
     override fun getPresentableText(): String =text
     override fun getIcon(unused: Boolean): Icon =icon
 }
+
