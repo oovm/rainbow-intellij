@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.voml.rainbow_intellij.language.psi.RbToken.*;
-import com.github.voml.rainbow_intellij.language.mixin.MixinGlobal;
+import com.github.voml.rainbow_intellij.language.mixin.MixinField;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainGlobalStatementNode extends MixinGlobal implements RainGlobalStatement {
+public class RainFieldStatementNode extends MixinField implements RainFieldStatement {
 
-  public RainGlobalStatementNode(@NotNull ASTNode node) {
+  public RainFieldStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitGlobalStatement(this);
+    visitor.visitFieldStatement(this);
   }
 
   @Override
@@ -30,14 +30,14 @@ public class RainGlobalStatementNode extends MixinGlobal implements RainGlobalSt
 
   @Override
   @NotNull
-  public RainBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RainBraceBlock.class);
+  public RainKey getKey() {
+    return findNotNullChildByClass(RainKey.class);
   }
 
   @Override
   @NotNull
-  public RainIdentifier getGlobal() {
-    return RainAstExtension.getGlobal(this);
+  public List<RainValue> getValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RainValue.class);
   }
 
 }

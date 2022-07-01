@@ -30,18 +30,6 @@ public class RainDefStatementNode extends ASTWrapperPsiElement implements RainDe
 
   @Override
   @Nullable
-  public RainPropertiesBlock getPropertiesBlock() {
-    return findChildByClass(RainPropertiesBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public RainPropertiesKey getPropertiesKey() {
-    return findNotNullChildByClass(RainPropertiesKey.class);
-  }
-
-  @Override
-  @Nullable
   public RainTypeHint getTypeHint() {
     return findChildByClass(RainTypeHint.class);
   }

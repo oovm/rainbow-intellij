@@ -8,12 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface RainDefStatement extends PsiElement {
 
   @Nullable
-  RainPropertiesBlock getPropertiesBlock();
-
-  @NotNull
-  RainPropertiesKey getPropertiesKey();
-
-  @Nullable
   RainTypeHint getTypeHint();
 
 }

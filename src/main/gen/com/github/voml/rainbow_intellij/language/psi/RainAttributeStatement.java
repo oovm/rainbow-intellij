@@ -5,15 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainPropertiesStatement extends PsiElement {
-
-  @Nullable
-  RainPropertiesBlock getPropertiesBlock();
+public interface RainAttributeStatement extends PsiElement {
 
   @NotNull
-  RainPropertiesKey getPropertiesKey();
+  List<RainAttributeValue> getAttributeValueList();
 
-  @Nullable
-  RainTypeHint getTypeHint();
+  @NotNull
+  RainKey getKey();
 
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainGlobalStatement extends PsiElement {
+public interface RainKey extends PsiElement {
 
-  @NotNull
-  RainBraceBlock getBraceBlock();
+  @Nullable
+  PsiElement getString();
 
-  @NotNull
-  RainIdentifier getGlobal();
+  @Nullable
+  PsiElement getSymbol();
 
 }

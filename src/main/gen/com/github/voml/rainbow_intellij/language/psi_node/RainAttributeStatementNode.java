@@ -12,14 +12,14 @@ import com.github.voml.rainbow_intellij.language.mixin.MixinGlobal;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainGlobalStatementNode extends MixinGlobal implements RainGlobalStatement {
+public class RainAttributeStatementNode extends MixinGlobal implements RainAttributeStatement {
 
-  public RainGlobalStatementNode(@NotNull ASTNode node) {
+  public RainAttributeStatementNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitGlobalStatement(this);
+    visitor.visitAttributeStatement(this);
   }
 
   @Override
@@ -30,14 +30,14 @@ public class RainGlobalStatementNode extends MixinGlobal implements RainGlobalSt
 
   @Override
   @NotNull
-  public RainBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RainBraceBlock.class);
+  public List<RainAttributeValue> getAttributeValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RainAttributeValue.class);
   }
 
   @Override
   @NotNull
-  public RainIdentifier getGlobal() {
-    return RainAstExtension.getGlobal(this);
+  public RainKey getKey() {
+    return findNotNullChildByClass(RainKey.class);
   }
 
 }

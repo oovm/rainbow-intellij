@@ -11,9 +11,6 @@ public interface RainMetaStatement extends PsiElement {
   RainBraceBlock getBraceBlock();
 
   @NotNull
-  RainIdentifier getIdentifier();
-
-  @NotNull
   RainIdentifier getMeta();
 
 }

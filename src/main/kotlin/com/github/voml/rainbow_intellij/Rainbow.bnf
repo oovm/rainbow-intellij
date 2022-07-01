@@ -70,35 +70,30 @@ schema_statement ::= "schema" identifier <<brace_block properties_inner ignore>>
     methods = [getSchema]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-meta_statement ::= "meta" identifier <<brace_block properties_inner ignore>> {
+meta_statement ::= "meta" <<brace_block properties_inner ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
     methods = [getMeta]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-global_statement ::= "global" identifier <<brace_block properties_inner ignore>> {
+global_statement ::= "global" <<brace_block properties_inner ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinGlobal"
     methods = [getGlobal]
 };
 // ---------------------------------------------------------------------------------------------------------------------
 // properties <ID>: <TYPE> { }
-properties_statement ::= ("properties" | "property" | "prop"| "field" | DOT) properties_key [type_hint] [properties_block];
-properties_key ::= STRING | SYMBOL {
-//    mixin = "com.github.voml.rainbow_intellij.language.mixin.JssPropertiesKeyMixin"
-}
-
+field_statement ::= key eq value+ {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinField"
+};
+key ::= STRING | SYMBOL;
+value ::= null | boolean | num | str | array | object | url_maybe_valid;
 // used in formatter
-properties_mark ::= DOT;
-properties_block ::= <<brace_block properties_inner ignore>>;
-
 private properties_inner ::=
     idiom_statement
-  | properties_statement
+  | field_statement
   | anno_statement
   | COMMENT_DOCUMENT
   | kv_pair // consider as anno
   ;
-// ---------------------------------------------------------------------------------------------------------------------
-def_statement ::= ("def"|"define"|"definition") properties_key [type_hint] [properties_block];
 // ---------------------------------------------------------------------------------------------------------------------
 // $schema: https://json-schema.org/draft/2020-12/schema
 idiom_statement ::= idiom_mark idiom_symbol [COLON] value;
@@ -117,7 +112,6 @@ private type_symbol ::= SYMBOL | STRING;
 //private key ::= string_inline | key_symbol | INTEGER;
 private eq ::= EQ | COLON;
 // ---------------------------------------------------------------------------------------------------------------------
-value ::= null | boolean | num | str | array | object | url_maybe_valid;
 null ::= "null";
 boolean ::= "true" | "false";
 // used in annotation

@@ -27,7 +27,7 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitDefStatement(@NotNull RainDefStatement o) {
+  public void visitFieldStatement(@NotNull RainFieldStatement o) {
     visitPsiElement(o);
   }
 
@@ -51,6 +51,10 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitKey(@NotNull RainKey o) {
+    visitPsiElement(o);
+  }
+
   public void visitKvPair(@NotNull RainKvPair o) {
     visitPsiElement(o);
   }
@@ -64,22 +68,6 @@ public class RainVisitor extends PsiElementVisitor {
   }
 
   public void visitObject(@NotNull RainObject o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPropertiesBlock(@NotNull RainPropertiesBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPropertiesKey(@NotNull RainPropertiesKey o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPropertiesMark(@NotNull RainPropertiesMark o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPropertiesStatement(@NotNull RainPropertiesStatement o) {
     visitPsiElement(o);
   }
 
