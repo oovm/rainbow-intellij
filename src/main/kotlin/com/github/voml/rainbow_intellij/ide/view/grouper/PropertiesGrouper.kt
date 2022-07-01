@@ -7,7 +7,7 @@ import com.intellij.ide.util.treeView.smartTree.*
 import com.intellij.util.PlatformIcons
 
 object PropertiesGrouper : Grouper {
-    override fun getName(): String = "view.PropertiesGrouper"
+    override fun getName(): String = "view.properties_grouper"
     override fun getPresentation(): ActionPresentation = ActionPresentationData(
         RainbowBundle.message(this.name),
         "GGGGG",

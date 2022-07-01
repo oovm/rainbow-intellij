@@ -65,7 +65,7 @@ private statement ::=
   | ignore;
 private ignore ::= SEMICOLON | COMMA;
 // ---------------------------------------------------------------------------------------------------------------------
-schema_statement ::= "schema" identifier <<brace_block attribute_statement ignore>> {
+schema_statement ::= "schema" identifier <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinSchema"
     methods = [getKeyword]
 };
@@ -89,10 +89,13 @@ language_inherit ::= identifier;
 // properties <ID>: <TYPE> { }
 attribute_statement ::= key eq (object_inherit|value+) {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinAttribute"
+    // recoverWhile = brace_recover
 };
 field_statement ::= key eq value {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinField"
+    // recoverWhile = brace_recover
 };
+private brace_recover ::= !(BRACE_R);
 // ---------------------------------------------------------------------------------------------------------------------
 array ::= <<bracket_block value ignore>>;
 object ::= <<brace_block field_statement ignore>>;
@@ -108,7 +111,7 @@ number ::= [SIGN] (INTEGER | DECIMAL);
 namespace  ::= identifier (DOT identifier)*;
 identifier ::= SYMBOL;
 color_literal ::= COLOR;
-string_literal ::= STRING_RAW;
+string_literal ::= STRING;
 literal ::= "true" | "false" | "null";
 // ---------------------------------------------------------------------------------------------------------------------
 // parenthesis ( )

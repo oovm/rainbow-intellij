@@ -1,11 +1,17 @@
 package com.github.voml.rainbow_intellij.ide.view
 
+import com.github.voml.rainbow_intellij.file.RainbowFile
+import com.github.voml.rainbow_intellij.language.psi_node.RainAttributeStatementNode
+import com.github.voml.rainbow_intellij.language.psi_node.RainGlobalStatementNode
+import com.github.voml.rainbow_intellij.language.psi_node.RainMetaStatementNode
+import com.github.voml.rainbow_intellij.language.psi_node.RainSchemaStatementNode
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement
 import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.NavigatablePsiElement
+import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
 class RbViewElement(private val node: NavigatablePsiElement, var view: RbItemPresentation? = null) :
@@ -34,21 +40,30 @@ class RbViewElement(private val node: NavigatablePsiElement, var view: RbItemPre
     fun getVisibility(): Boolean = true
 
     override fun getChildren(): Array<out TreeElement> = when (node) {
-//        is FluentFile -> getChildOfType(
-//            FluentMessageNode::class.java,
-//            FluentTermNode::class.java,
-//        )
-//        is FluentMessageNode, is FluentTermNode -> getChildOfType(
-//            FluentAttributeNode::class.java,
-//        )
-//        is FluentAttributeNode -> arrayOf()
-        else -> getChildOfType(
+        is RainbowFile -> getChildOfType(
+            node,
             NavigatablePsiElement::class.java,
         )
+        is RainSchemaStatementNode -> getChildOfType(
+            node.braceBlock,
+            RainAttributeStatementNode::class.java,
+        )
+        is RainMetaStatementNode -> getChildOfType(
+            node.braceBlock,
+            RainAttributeStatementNode::class.java,
+        )
+        is RainGlobalStatementNode -> getChildOfType(
+            node.braceBlock,
+            RainAttributeStatementNode::class.java,
+        )
+        else -> arrayOf()
     }
 
-    private fun getChildOfType(vararg classes: Class<out NavigatablePsiElement>): Array<RbViewElement> {
-        return PsiTreeUtil.getChildrenOfAnyType(node, *classes)
+    private fun getChildOfType(
+        root: PsiElement,
+        vararg classes: Class<out NavigatablePsiElement>,
+    ): Array<RbViewElement> {
+        return PsiTreeUtil.getChildrenOfAnyType(root, *classes)
             .map { RbViewElement(it) }
             .toTypedArray()
     }

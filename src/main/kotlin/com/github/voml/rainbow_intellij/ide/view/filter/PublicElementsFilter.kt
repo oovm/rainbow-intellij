@@ -11,11 +11,10 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement
 
 
 object PublicElementsFilter : Filter {
-    override fun getName() = "view.PublicElementsFilter"
-
+    override fun getName() = "view.public_elements_filter"
     override fun isReverted() = true
     override fun getPresentation(): ActionPresentation = ActionPresentationData(
-        RainbowBundle.message(name),
+        RainbowBundle.message(this.name),
         null,
         AllIcons.Nodes.Public
     )

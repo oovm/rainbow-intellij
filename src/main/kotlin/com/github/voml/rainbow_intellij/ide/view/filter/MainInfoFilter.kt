@@ -11,7 +11,7 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement
 
 object MainInfoFilter : Filter {
 
-    override fun getName() = "view.MainInfoFilter"
+    override fun getName() = "view.main_info_filter"
 
     override fun isReverted() = true
     override fun getPresentation(): ActionPresentation = ActionPresentationData(

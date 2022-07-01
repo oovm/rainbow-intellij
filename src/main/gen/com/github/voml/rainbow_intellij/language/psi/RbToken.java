@@ -54,7 +54,6 @@ public interface RbToken {
   IElementType SIGN = new RbTokenType("SIGN");
   IElementType STAR = new RbTokenType("*");
   IElementType STRING = new RbTokenType("String");
-  IElementType STRING_RAW = new RbTokenType("STRING_RAW");
   IElementType SYMBOL = new RbTokenType("Symbol");
   IElementType URL = new RbTokenType("Url");
 
