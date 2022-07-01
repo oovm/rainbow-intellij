@@ -108,7 +108,9 @@ object_inherit ::= namespace? object;
 // ---------------------------------------------------------------------------------------------------------------------
 number ::= [SIGN] (INTEGER | DECIMAL);
 namespace  ::= identifier (DOT identifier)*;
-identifier ::= SYMBOL;
+identifier ::= SYMBOL {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinIdentifier"
+};
 color_literal ::= COLOR;
 string_literal ::= STRING;
 literal ::= "true" | "false" | "null";

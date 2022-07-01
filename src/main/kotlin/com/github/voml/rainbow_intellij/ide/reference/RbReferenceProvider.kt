@@ -1,8 +1,6 @@
-package com.github.voml.rainbow_intellij.ide.doc
+package com.github.voml.rainbow_intellij.ide.reference
 
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiReference
-import com.intellij.psi.PsiReferenceProvider
+import com.intellij.psi.*
 import com.intellij.util.ProcessingContext
 
 class RbReferenceProvider : PsiReferenceProvider() {
@@ -10,4 +8,8 @@ class RbReferenceProvider : PsiReferenceProvider() {
         TODO("Not yet implemented")
     }
 
+    override fun acceptsHints(element: PsiElement, hints: PsiReferenceService.Hints): Boolean {
+        return super.acceptsHints(element, hints)
+    }
 }
+

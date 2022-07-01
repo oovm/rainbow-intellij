@@ -15,8 +15,12 @@ abstract class MixinSchema(node: ASTNode) : DeclareNode(node),
         return this.identifier
     }
 
+    override fun getTextOffset(): Int {
+        return nameIdentifier.textOffset
+    }
+
     override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Gutter.Colors, nameIdentifier.text)
+        return RbItemPresentation(AllIcons.Nodes.MultipleTypeDefinitions, nameIdentifier.text)
     }
 
     override fun setName(name: String): PsiElement {
