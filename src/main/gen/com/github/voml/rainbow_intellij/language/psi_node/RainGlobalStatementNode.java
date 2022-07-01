@@ -36,8 +36,8 @@ public class RainGlobalStatementNode extends MixinGlobal implements RainGlobalSt
 
   @Override
   @NotNull
-  public RainIdentifier getGlobal() {
-    return RainAstExtension.getGlobal(this);
+  public RainIdentifier getKeyword() {
+    return RainAstExtension.getKeyword(this);
   }
 
 }

@@ -42,8 +42,14 @@ public class RainValueNode extends ASTWrapperPsiElement implements RainValue {
 
   @Override
   @Nullable
-  public RainIdentifier getIdentifier() {
-    return findChildByClass(RainIdentifier.class);
+  public RainColor getColor() {
+    return findChildByClass(RainColor.class);
+  }
+
+  @Override
+  @Nullable
+  public RainNamespace getNamespace() {
+    return findChildByClass(RainNamespace.class);
   }
 
   @Override

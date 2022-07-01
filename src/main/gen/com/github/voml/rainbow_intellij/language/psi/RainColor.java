@@ -5,12 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainMetaStatement extends PsiElement {
-
-  @NotNull
-  RainBraceBlock getBraceBlock();
-
-  @NotNull
-  RainIdentifier getKeyword();
+public interface RainColor extends PsiElement {
 
 }

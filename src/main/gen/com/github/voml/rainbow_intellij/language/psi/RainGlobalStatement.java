@@ -11,6 +11,6 @@ public interface RainGlobalStatement extends PsiElement {
   RainBraceBlock getBraceBlock();
 
   @NotNull
-  RainIdentifier getGlobal();
+  RainIdentifier getKeyword();
 
 }

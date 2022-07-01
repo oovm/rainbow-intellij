@@ -29,7 +29,7 @@ enum class RainbowColor(humanName: Supplier<@NlsContexts.AttributeDescriptor Str
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
-    SYM_ANNO(RainbowBundle.messagePointer("color.token.symbol.annotation"), Default.STATIC_METHOD),
+    SYM_CLASS(RainbowBundle.messagePointer("color.token.symbol.annotation"), Default.CLASS_NAME),
     SYM_SCHEMA(RainbowBundle.messagePointer("color.token.symbol.schema"), Default.PREDEFINED_SYMBOL),
     SYM_FIELD(RainbowBundle.messagePointer("color.token.symbol.property"), Default.STATIC_FIELD),
 

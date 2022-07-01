@@ -60,47 +60,47 @@ private statement ::=
     schema_statement
   | meta_statement
   | global_statement
+  | language_statement
   | COMMENT_DOCUMENT
   | ignore;
 private ignore ::= SEMICOLON | COMMA;
 // ---------------------------------------------------------------------------------------------------------------------
 // schema <ID>: <TYPE> { }
-schema_statement ::= "schema" identifier <<brace_block properties_inner ignore>> {
+schema_statement ::= "schema" identifier <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinSchema"
-    methods = [getSchema]
+    methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-meta_statement ::= "meta" <<brace_block properties_inner ignore>> {
+meta_statement ::= "meta" <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
-    methods = [getMeta]
+    methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-global_statement ::= "global" <<brace_block properties_inner ignore>> {
+global_statement ::= "global" <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinGlobal"
-    methods = [getGlobal]
+    methods = [getKeyword]
 };
+// ---------------------------------------------------------------------------------------------------------------------
+language_statement ::= "language" identifier [COLON language_inherit] <<brace_block field_statement ignore>> {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinLanguage"
+    methods = [getKeyword]
+};
+language_inherit ::= identifier;
 // ---------------------------------------------------------------------------------------------------------------------
 // properties <ID>: <TYPE> { }
 field_statement ::= key eq value+ {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinField"
 };
 key ::= STRING_RAW | SYMBOL;
-value ::= null | boolean | number | string | array | object | url_maybe_valid | identifier;
-// used in formatter
-private properties_inner ::=
-    field_statement
-  | COMMENT_DOCUMENT
-  | kv_pair // consider as anno
-  ;
-// ---------------------------------------------------------------------------------------------------------------------
-//symbol_path ::= key (DOT key)*;
-//private key ::= string_inline | key_symbol | INTEGER;
 private eq ::= EQ | COLON;
+value ::= array | object | data | namespace;
+private data ::= null | boolean | number | string | color | url_maybe_valid;
 // ---------------------------------------------------------------------------------------------------------------------
 null ::= "null";
 boolean ::= "true" | "false";
 // used in annotation
 url_maybe_valid ::= URL;
+color ::= COLOR_LITERAL;
 // ---------------------------------------------------------------------------------------------------------------------
 number ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -112,6 +112,7 @@ array ::= <<bracket_block value ignore>>;
 object ::= <<brace_block kv_pair ignore>>;
 kv_pair ::= (string_inline|SYMBOL) eq value;
 // ---------------------------------------------------------------------------------------------------------------------
+namespace  ::= identifier (DOT identifier)*;
 identifier ::= SYMBOL;
 // ---------------------------------------------------------------------------------------------------------------------
 // parenthesis ( )

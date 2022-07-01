@@ -30,24 +30,6 @@ public class RainNumberNode extends ASTWrapperPsiElement implements RainNumber {
 
   @Override
   @Nullable
-  public PsiElement getByte() {
-    return findChildByType(BYTE);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getDecimal() {
-    return findChildByType(DECIMAL);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getInteger() {
-    return findChildByType(INTEGER);
-  }
-
-  @Override
-  @Nullable
   public PsiElement getSign() {
     return findChildByType(SIGN);
   }

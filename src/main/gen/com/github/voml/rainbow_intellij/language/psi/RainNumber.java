@@ -8,15 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface RainNumber extends PsiElement {
 
   @Nullable
-  PsiElement getByte();
-
-  @Nullable
-  PsiElement getDecimal();
-
-  @Nullable
-  PsiElement getInteger();
-
-  @Nullable
   PsiElement getSign();
 
 }

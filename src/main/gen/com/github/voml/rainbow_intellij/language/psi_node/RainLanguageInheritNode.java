@@ -8,18 +8,18 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.voml.rainbow_intellij.language.psi.RbToken.*;
-import com.github.voml.rainbow_intellij.language.mixin.MixinMeta;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainMetaStatementNode extends MixinMeta implements RainMetaStatement {
+public class RainLanguageInheritNode extends ASTWrapperPsiElement implements RainLanguageInherit {
 
-  public RainMetaStatementNode(@NotNull ASTNode node) {
+  public RainLanguageInheritNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitMetaStatement(this);
+    visitor.visitLanguageInherit(this);
   }
 
   @Override
@@ -30,14 +30,8 @@ public class RainMetaStatementNode extends MixinMeta implements RainMetaStatemen
 
   @Override
   @NotNull
-  public RainBraceBlock getBraceBlock() {
-    return findNotNullChildByClass(RainBraceBlock.class);
-  }
-
-  @Override
-  @NotNull
-  public RainIdentifier getKeyword() {
-    return RainAstExtension.getKeyword(this);
+  public RainIdentifier getIdentifier() {
+    return findNotNullChildByClass(RainIdentifier.class);
   }
 
 }

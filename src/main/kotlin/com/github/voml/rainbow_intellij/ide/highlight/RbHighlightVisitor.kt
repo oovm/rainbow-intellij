@@ -13,20 +13,29 @@ class RbHighlightVisitor : RbRecursiveVisitor(), HighlightVisitor {
     private var infoHolder: HighlightInfoHolder? = null
 
     override fun visitSchemaStatement(o: RainSchemaStatement) {
-        highlight(o.schema, RainbowColor.KEYWORD)
+        highlight(o.keyword, RainbowColor.KEYWORD)
         highlight(o.identifier, RainbowColor.SYM_SCHEMA)
     }
 
     override fun visitMetaStatement(o: RainMetaStatement) {
-        highlight(o.meta, RainbowColor.KEYWORD)
+        highlight(o.keyword, RainbowColor.KEYWORD)
     }
 
     override fun visitGlobalStatement(o: RainGlobalStatement) {
-        highlight(o.global, RainbowColor.KEYWORD)
+        highlight(o.keyword, RainbowColor.KEYWORD)
     }
 
     override fun visitFieldStatement(o: RainFieldStatement) {
         highlight(o.key, RainbowColor.SYM_FIELD)
+    }
+
+    override fun visitLanguageStatement(o: RainLanguageStatement) {
+        highlight(o.keyword, RainbowColor.KEYWORD)
+        highlight(o.identifier, RainbowColor.SYM_CLASS)
+    }
+
+    override fun visitLanguageInherit(o: RainLanguageInherit) {
+        highlight(o.identifier, RainbowColor.SYM_CLASS)
     }
 
     private fun highlight(element: PsiElement, color: RainbowColor) {

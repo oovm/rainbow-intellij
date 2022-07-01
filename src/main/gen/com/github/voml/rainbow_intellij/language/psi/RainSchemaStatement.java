@@ -14,6 +14,6 @@ public interface RainSchemaStatement extends PsiElement {
   RainIdentifier getIdentifier();
 
   @NotNull
-  RainIdentifier getSchema();
+  RainIdentifier getKeyword();
 
 }
