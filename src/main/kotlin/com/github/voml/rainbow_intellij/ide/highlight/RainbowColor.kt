@@ -26,14 +26,16 @@ enum class RainbowColor(humanName: Supplier<@NlsContexts.AttributeDescriptor Str
     INTEGER(RainbowBundle.messagePointer("color.token.integer"), Default.NUMBER),
     STRING(RainbowBundle.messagePointer("color.token.string"), Default.STRING),
     URL(RainbowBundle.messagePointer("color.token.url"), STRING.textAttributesKey),
-    COLOR(OptionsBundle.messagePointer("options.language.defaults.color"), Default.METADATA),
+    COLOR(OptionsBundle.messagePointer("color.token.color"), Default.METADATA),
 
     // 标识符
     IDENTIFIER(OptionsBundle.messagePointer("options.language.defaults.identifier"), Default.IDENTIFIER),
     SYM_SCHEMA(RainbowBundle.messagePointer("color.token.symbol.schema"), Default.PREDEFINED_SYMBOL),
     SYM_LANGUAGE(RainbowBundle.messagePointer("color.token.symbol.language"), Default.CLASS_NAME),
-    SYM_ATTRIBUTE(RainbowBundle.messagePointer("color.token.symbol.attrubute"), Default.STATIC_FIELD),
+    SYM_ATTRIBUTE(RainbowBundle.messagePointer("color.token.symbol.attribute"), Default.STATIC_FIELD),
     SYM_FIELD(RainbowBundle.messagePointer("color.token.symbol.property"), Default.LOCAL_VARIABLE),
+    SYM_MACRO(RainbowBundle.messagePointer("color.token.symbol.macro"), Default.KEYWORD),
+
     //
     TYPE_HINT(RainbowBundle.messagePointer("color.token.symbol.type"), Default.CLASS_NAME),
 

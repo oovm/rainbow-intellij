@@ -30,6 +30,7 @@ COMMENT=("//")[^\r\n]*
 COMMENT_BLOCK=[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]
 URL= [A-Za-z0-9]+:"//"[\-\p{XID_Continue}./?&#]+
 SYMBOL=[\p{XID_Start}_][\p{XID_Continue}_-]*
+MACRO = @{SYMBOL}
 COLOR=[#][0-9a-fA-F]+
 STRING_RAW=\"([^\"\\]|\\.)*\"
 BYTE=(0[bBoOxXfF][0-9A-Fa-f][0-9A-Fa-f_]*)
@@ -59,7 +60,6 @@ SIGN=[+-]
 	"$"    { return DOLLAR; }
 	"."    { return DOT; }
 	"*"    { return STAR; }
-	"@"    { return AT; }
 }
 
 <YYINITIAL> {
@@ -67,6 +67,7 @@ SIGN=[+-]
 	{COMMENT}             { return COMMENT; }
 	{COMMENT_BLOCK}       { return COMMENT_BLOCK; }
 	{URL}                 { return URL; }
+	{MACRO}               { return MACRO; }
 	{SYMBOL}              { return SYMBOL; }
 	{STRING_RAW}          { return STRING_RAW; }
 	{COLOR}               { return COLOR_LITERAL; }

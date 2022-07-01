@@ -11,24 +11,15 @@ public interface RainValue extends PsiElement {
   RainArray getArray();
 
   @Nullable
-  RainBoolean getBoolean();
-
-  @Nullable
-  RainColor getColor();
+  RainLiteral getLiteral();
 
   @Nullable
   RainNamespace getNamespace();
-
-  @Nullable
-  RainNull getNull();
 
   @Nullable
   RainNumber getNumber();
 
   @Nullable
   RainString getString();
-
-  @Nullable
-  RainUrlMaybeValid getUrlMaybeValid();
 
 }

@@ -101,15 +101,9 @@ object ::= <<brace_block field_statement ignore>>;
 key ::= string_inline | identifier;
 private eq ::= EQ | COLON;
 value ::= array | data | namespace;
-private data ::= null | boolean | number | string | color | url_maybe_valid;
+private data ::= null | boolean | number | string | literal;
 // ---------------------------------------------------------------------------------------------------------------------
 object_inherit ::= namespace? object;
-// ---------------------------------------------------------------------------------------------------------------------
-null ::= "null";
-boolean ::= "true" | "false";
-// used in annotation
-url_maybe_valid ::= URL;
-color ::= COLOR_LITERAL;
 // ---------------------------------------------------------------------------------------------------------------------
 number ::= [SIGN] (INTEGER | DECIMAL) | [SIGN] BYTE;
 // ---------------------------------------------------------------------------------------------------------------------
@@ -119,6 +113,7 @@ string_multi ::= STRING_RAW;
 // ---------------------------------------------------------------------------------------------------------------------
 namespace  ::= identifier (DOT identifier)*;
 identifier ::= SYMBOL;
+literal    ::= COLOR | MACRO | "true" | "false" | "null";
 // ---------------------------------------------------------------------------------------------------------------------
 // parenthesis ( )
 private meta parenthesis ::= PARENTHESIS_L <<param>> PARENTHESIS_R;

@@ -15,19 +15,11 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitBoolean(@NotNull RainBoolean o) {
-    visitPsiElement(o);
-  }
-
   public void visitBraceBlock(@NotNull RainBraceBlock o) {
     visitPsiElement(o);
   }
 
   public void visitBracketBlock(@NotNull RainBracketBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitColor(@NotNull RainColor o) {
     visitPsiElement(o);
   }
 
@@ -55,15 +47,15 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitLiteral(@NotNull RainLiteral o) {
+    visitPsiElement(o);
+  }
+
   public void visitMetaStatement(@NotNull RainMetaStatement o) {
     visitPsiElement(o);
   }
 
   public void visitNamespace(@NotNull RainNamespace o) {
-    visitPsiElement(o);
-  }
-
-  public void visitNull(@NotNull RainNull o) {
     visitPsiElement(o);
   }
 
@@ -92,10 +84,6 @@ public class RainVisitor extends PsiElementVisitor {
   }
 
   public void visitStringMulti(@NotNull RainStringMulti o) {
-    visitPsiElement(o);
-  }
-
-  public void visitUrlMaybeValid(@NotNull RainUrlMaybeValid o) {
     visitPsiElement(o);
   }
 

@@ -34,7 +34,9 @@ class RbTokenHighlighter : SyntaxHighlighterBase() {
             URL -> RainbowColor.URL
             STRING, STRING_RAW -> RainbowColor.STRING
             SYMBOL -> RainbowColor.IDENTIFIER
-            COLOR_LITERAL -> RainbowColor.COLOR
+            COLOR -> RainbowColor.COLOR
+            MACRO -> RainbowColor.SYM_MACRO
+
             // 注释
             COMMENT -> RainbowColor.LINE_COMMENT
             COMMENT_BLOCK -> RainbowColor.BLOCK_COMMENT

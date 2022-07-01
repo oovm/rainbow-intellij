@@ -5,6 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainColor extends PsiElement {
+public interface RainLiteral extends PsiElement {
 
 }

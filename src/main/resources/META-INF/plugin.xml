@@ -34,9 +34,6 @@
 		<lang.syntaxHighlighter
 			language="Rainbow"
 			implementationClass="com.github.voml.rainbow_intellij.ide.highlight.RbTokenHighlighter"/>
-		<codeInsight.lineMarkerProvider
-			language="Rainbow"
-			implementationClass="com.github.voml.rainbow_intellij.ide.highlight.RbColorMarkerProvider"/>
 		<!-- Formatter -->
 		<lang.formatter
 			language="Rainbow"

@@ -10,19 +10,17 @@ public interface RbToken {
 
   IElementType ARRAY = new RbElementType("ARRAY");
   IElementType ATTRIBUTE_STATEMENT = new RbElementType("ATTRIBUTE_STATEMENT");
-  IElementType BOOLEAN = new RbElementType("BOOLEAN");
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
   IElementType BRACKET_BLOCK = new RbElementType("BRACKET_BLOCK");
-  IElementType COLOR = new RbElementType("COLOR");
   IElementType FIELD_STATEMENT = new RbElementType("FIELD_STATEMENT");
   IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
   IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
   IElementType KEY = new RbElementType("KEY");
   IElementType LANGUAGE_INHERIT = new RbElementType("LANGUAGE_INHERIT");
   IElementType LANGUAGE_STATEMENT = new RbElementType("LANGUAGE_STATEMENT");
+  IElementType LITERAL = new RbElementType("LITERAL");
   IElementType META_STATEMENT = new RbElementType("META_STATEMENT");
   IElementType NAMESPACE = new RbElementType("NAMESPACE");
-  IElementType NULL = new RbElementType("NULL");
   IElementType NUMBER = new RbElementType("NUMBER");
   IElementType OBJECT = new RbElementType("OBJECT");
   IElementType OBJECT_INHERIT = new RbElementType("OBJECT_INHERIT");
@@ -30,20 +28,20 @@ public interface RbToken {
   IElementType STRING = new RbElementType("STRING");
   IElementType STRING_INLINE = new RbElementType("STRING_INLINE");
   IElementType STRING_MULTI = new RbElementType("STRING_MULTI");
-  IElementType URL_MAYBE_VALID = new RbElementType("URL_MAYBE_VALID");
   IElementType VALUE = new RbElementType("VALUE");
 
   IElementType ACCENT = new RbTokenType("^");
   IElementType ANGLE_L = new RbTokenType("<");
   IElementType ANGLE_R = new RbTokenType(">");
   IElementType AT = new RbTokenType("@");
+  IElementType BOOLEAN = new RbTokenType("boolean");
   IElementType BRACE_L = new RbTokenType("{");
   IElementType BRACE_R = new RbTokenType("}");
   IElementType BRACKET_L = new RbTokenType("[");
   IElementType BRACKET_R = new RbTokenType("]");
   IElementType BYTE = new RbTokenType("Byte");
   IElementType COLON = new RbTokenType(":");
-  IElementType COLOR_LITERAL = new RbTokenType("COLOR_LITERAL");
+  IElementType COLOR = new RbTokenType("COLOR");
   IElementType COMMA = new RbTokenType(",");
   IElementType COMMENT = new RbTokenType("Comment");
   IElementType COMMENT_BLOCK = new RbTokenType("Comment Block");
@@ -53,6 +51,8 @@ public interface RbToken {
   IElementType DOT = new RbTokenType(".");
   IElementType EQ = new RbTokenType("=");
   IElementType INTEGER = new RbTokenType("Integer");
+  IElementType MACRO = new RbTokenType("MACRO");
+  IElementType NULL = new RbTokenType("null");
   IElementType PARENTHESIS_L = new RbTokenType("(");
   IElementType PARENTHESIS_R = new RbTokenType(")");
   IElementType SEMICOLON = new RbTokenType(";");
@@ -71,17 +71,11 @@ public interface RbToken {
       else if (type == ATTRIBUTE_STATEMENT) {
         return new RainAttributeStatementNode(node);
       }
-      else if (type == BOOLEAN) {
-        return new RainBooleanNode(node);
-      }
       else if (type == BRACE_BLOCK) {
         return new RainBraceBlockNode(node);
       }
       else if (type == BRACKET_BLOCK) {
         return new RainBracketBlockNode(node);
-      }
-      else if (type == COLOR) {
-        return new RainColorNode(node);
       }
       else if (type == FIELD_STATEMENT) {
         return new RainFieldStatementNode(node);
@@ -101,14 +95,14 @@ public interface RbToken {
       else if (type == LANGUAGE_STATEMENT) {
         return new RainLanguageStatementNode(node);
       }
+      else if (type == LITERAL) {
+        return new RainLiteralNode(node);
+      }
       else if (type == META_STATEMENT) {
         return new RainMetaStatementNode(node);
       }
       else if (type == NAMESPACE) {
         return new RainNamespaceNode(node);
-      }
-      else if (type == NULL) {
-        return new RainNullNode(node);
       }
       else if (type == NUMBER) {
         return new RainNumberNode(node);
@@ -130,9 +124,6 @@ public interface RbToken {
       }
       else if (type == STRING_MULTI) {
         return new RainStringMultiNode(node);
-      }
-      else if (type == URL_MAYBE_VALID) {
-        return new RainUrlMaybeValidNode(node);
       }
       else if (type == VALUE) {
         return new RainValueNode(node);
