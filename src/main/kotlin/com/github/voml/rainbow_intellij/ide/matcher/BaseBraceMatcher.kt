@@ -1,7 +1,7 @@
 package com.github.voml.rainbow_intellij.ide.matcher
 
 
-import com.github.voml.rainbow_intellij.language.psi.JSS_COMMENT
+import com.github.voml.rainbow_intellij.language.psi.RB_COMMENT
 import com.github.voml.rainbow_intellij.language.psi.RbToken
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
@@ -28,7 +28,7 @@ class BaseBraceMatcher : PairedBraceMatcher {
         )
 
         private val InsertPairBraceBefore = TokenSet.orSet(
-            JSS_COMMENT,
+            RB_COMMENT,
             TokenSet.create(
                 TokenType.WHITE_SPACE,
                 RbToken.COMMA,

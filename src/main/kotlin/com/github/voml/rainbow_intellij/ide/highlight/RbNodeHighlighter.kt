@@ -49,6 +49,10 @@ class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
         highlight(o.identifier, RainbowColor.SYM_LANGUAGE)
     }
 
+    override fun visitNamespace(o: RainNamespace) {
+        super.visitNamespace(o)
+    }
+
     private fun highlight(element: PsiElement, color: RainbowColor) {
         val builder = HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION)
         builder.textAttributes(color.textAttributesKey)

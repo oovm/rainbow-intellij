@@ -186,7 +186,7 @@ inline val <T : StubElement<*>> StubBasedPsiElement<T>.greenStub: T?
     get() = (this as? StubBasedPsiElementBase<T>)?.greenStub
 
 
-val JSS_COMMENT = TokenSet.create(
+val RB_COMMENT = TokenSet.create(
     RbToken.COMMENT,
     RbToken.COMMENT_BLOCK,
     RbToken.COMMENT_DOCUMENT

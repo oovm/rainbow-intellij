@@ -13,11 +13,10 @@ abstract class MixinNamespace(node: ASTNode) : ASTWrapperPsiElement(node),
     }
 
     override fun getReferences(): Array<PsiReference> {
-        return this.getIdentifierList().map {
-            RbReference(it)
-        }.toTypedArray()
-
-
+        return this
+            .identifierList
+            .map { RbReference(it) }
+            .toTypedArray()
     }
 }
 

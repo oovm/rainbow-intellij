@@ -1,23 +1,27 @@
 package com.github.voml.rainbow_intellij.ide.reference
 
+import com.github.voml.rainbow_intellij.language.psi_node.RainMetaStatementNode
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
-import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference
+import com.intellij.psi.util.findTopmostParentInFile
 
-class RbReference(private var target: PsiElement) : CachingReference() {
-    var children: Map<String, PsiReference> = mapOf()
-    var kind: RbReferenceKind = RbReferenceKind.UNKNOWN
+// CachingReference
+class RbReference(private var source: PsiElement) : PsiReference {
     override fun getElement(): PsiElement {
-        TODO("Not yet implemented")
+        return source.parent
     }
 
     override fun getRangeInElement(): TextRange {
-        TODO("Not yet implemented")
+        return element.textRange
+    }
+
+    override fun resolve(): PsiElement? {
+        return source.findTopmostParentInFile { it is RainMetaStatementNode }
     }
 
     override fun getCanonicalText(): String {
-        TODO("Not yet implemented")
+        return source.text
     }
 
     override fun handleElementRename(newElementName: String): PsiElement {
@@ -28,9 +32,7 @@ class RbReference(private var target: PsiElement) : CachingReference() {
         TODO("Not yet implemented")
     }
 
-    override fun resolveInner(): PsiElement? {
-        TODO("Not yet implemented")
-    }
+    override fun isReferenceTo(element: PsiElement) = true
 
-
+    override fun isSoft() = false
 }
