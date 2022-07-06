@@ -18,7 +18,7 @@ class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
     }
 
     override fun visitMetaStatement(o: RainMetaStatement) {
-        highlight(o.keyword, RainbowColor.KEYWORD)
+        highlight(o.identifier, RainbowColor.KEYWORD)
     }
 
     override fun visitGlobalStatement(o: RainGlobalStatement) {

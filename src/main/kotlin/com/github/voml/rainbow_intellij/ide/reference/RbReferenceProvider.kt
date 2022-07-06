@@ -1,7 +1,11 @@
 package com.github.voml.rainbow_intellij.ide.reference
 
-import com.intellij.psi.*
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiReference
+import com.intellij.psi.PsiReferenceProvider
+import com.intellij.psi.PsiReferenceService
 import com.intellij.util.ProcessingContext
+
 
 class RbReferenceProvider : PsiReferenceProvider() {
     override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
@@ -12,4 +16,3 @@ class RbReferenceProvider : PsiReferenceProvider() {
         return super.acceptsHints(element, hints)
     }
 }
-

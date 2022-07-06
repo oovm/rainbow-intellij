@@ -70,9 +70,8 @@ schema_statement ::= "schema" identifier <<brace_block field_statement ignore>> 
     methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
-meta_statement ::= "meta" <<brace_block field_statement ignore>> {
+meta_statement ::= identifier <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
-    methods = [getKeyword]
 };
 // ---------------------------------------------------------------------------------------------------------------------
 global_statement ::= "global" <<brace_block attribute_statement ignore>> {
@@ -107,10 +106,10 @@ private data ::= literal | string_literal | color_literal | number;
 object_inherit ::= namespace? object;
 // ---------------------------------------------------------------------------------------------------------------------
 number ::= [SIGN] (INTEGER | DECIMAL);
-namespace  ::= identifier (DOT identifier)*;
-identifier ::= SYMBOL {
-    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinIdentifier"
+namespace  ::= identifier (DOT identifier)* {
+    mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinNamespace"
 };
+identifier ::= SYMBOL;
 color_literal ::= COLOR;
 string_literal ::= STRING;
 literal ::= "true" | "false" | "null";

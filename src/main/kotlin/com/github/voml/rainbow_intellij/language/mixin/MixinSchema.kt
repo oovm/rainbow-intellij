@@ -15,9 +15,6 @@ abstract class MixinSchema(node: ASTNode) : DeclareNode(node),
         return this.identifier
     }
 
-    override fun getTextOffset(): Int {
-        return nameIdentifier.textOffset
-    }
 
     override fun getPresentation(): ItemPresentation {
         return RbItemPresentation(AllIcons.Nodes.MultipleTypeDefinitions, nameIdentifier.text)

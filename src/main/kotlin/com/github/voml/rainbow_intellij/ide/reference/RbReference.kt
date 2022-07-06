@@ -3,14 +3,16 @@ package com.github.voml.rainbow_intellij.ide.reference
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
+import com.intellij.psi.impl.source.resolve.reference.impl.CachingReference
 
-class RbReference(var kind: RbReferenceKind, private var target: PsiElement) : PsiReference {
+class RbReference(private var target: PsiElement) : CachingReference() {
     var children: Map<String, PsiReference> = mapOf()
-    override fun getElement(): PsiElement = target
+    var kind: RbReferenceKind = RbReferenceKind.UNKNOWN
+    override fun getElement(): PsiElement {
+        TODO("Not yet implemented")
+    }
 
-    override fun getRangeInElement(): TextRange = element.textRange
-
-    override fun resolve(): PsiElement? {
+    override fun getRangeInElement(): TextRange {
         TODO("Not yet implemented")
     }
 
@@ -26,12 +28,9 @@ class RbReference(var kind: RbReferenceKind, private var target: PsiElement) : P
         TODO("Not yet implemented")
     }
 
-    override fun isReferenceTo(element: PsiElement): Boolean {
+    override fun resolveInner(): PsiElement? {
         TODO("Not yet implemented")
     }
 
-    override fun isSoft(): Boolean {
-        TODO("Not yet implemented")
-    }
 
 }

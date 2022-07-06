@@ -11,11 +11,9 @@ import com.intellij.psi.PsiElement
 abstract class MixinLanguage(node: ASTNode) : DeclareNode(node),
     RainLanguageStatement {
     override fun getNameIdentifier(): PsiElement {
-        return this.identifier
+        return this.identifier.firstChild
     }
-    override fun getTextOffset(): Int {
-        return nameIdentifier.textOffset
-    }
+
 
     override fun getPresentation(): ItemPresentation {
         return RbItemPresentation(AllIcons.FileTypes.AddAny, nameIdentifier.text)

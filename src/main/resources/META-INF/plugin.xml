@@ -49,7 +49,7 @@
 		/>
 		<!-- Document -->
 		<!--documentationProvider implementation="com.github.voml.jss_intellij.ide.doc.JssDocumentationExtender"-->
-		<psi.referenceContributor implementation="com.github.voml.rainbow_intellij.ide.doc.RbUrlReferenceContributor"/>
+<!--		<psi.referenceContributor implementation="com.github.voml.rainbow_intellij.ide.reference.RbReferenceContributor"/>-->
 		<lang.documentationProvider
 			language="Rainbow"
 			implementationClass="com.github.voml.rainbow_intellij.ide.doc.JssDocumentationProvider"

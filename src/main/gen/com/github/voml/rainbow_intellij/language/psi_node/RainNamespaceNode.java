@@ -8,11 +8,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.voml.rainbow_intellij.language.psi.RbToken.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.github.voml.rainbow_intellij.language.mixin.MixinNamespace;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainNamespaceNode extends ASTWrapperPsiElement implements RainNamespace {
+public class RainNamespaceNode extends MixinNamespace implements RainNamespace {
 
   public RainNamespaceNode(@NotNull ASTNode node) {
     super(node);

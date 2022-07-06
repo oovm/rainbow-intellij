@@ -36,8 +36,8 @@ public class RainMetaStatementNode extends MixinMeta implements RainMetaStatemen
 
   @Override
   @NotNull
-  public RainIdentifier getKeyword() {
-    return RainAstExtension.getKeyword(this);
+  public RainIdentifier getIdentifier() {
+    return findNotNullChildByClass(RainIdentifier.class);
   }
 
 }

@@ -11,7 +11,13 @@ abstract class DeclareNode(node: ASTNode) : ASTWrapperPsiElement(node),
     PsiNameIdentifierOwner {
     abstract override fun getNameIdentifier(): PsiElement;
 
+    override fun getName(): String? {
+        return nameIdentifier.text
+    }
     override fun getNavigationElement(): PsiElement {
         return nameIdentifier
+    }
+    override fun getTextOffset(): Int {
+        return nameIdentifier.textOffset
     }
 }

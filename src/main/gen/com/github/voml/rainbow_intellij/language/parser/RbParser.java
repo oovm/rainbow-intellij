@@ -363,14 +363,15 @@ public class RbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // "meta" <<brace_block field_statement ignore>>
+  // identifier <<brace_block field_statement ignore>>
   public static boolean meta_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "meta_statement")) return false;
+    if (!nextTokenIs(b, SYMBOL)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, META_STATEMENT, "<meta statement>");
-    r = consumeToken(b, "meta");
+    Marker m = enter_section_(b);
+    r = identifier(b, l + 1);
     r = r && brace_block(b, l + 1, RbParser::field_statement, RbParser::ignore);
-    exit_section_(b, l, m, r, false, null);
+    exit_section_(b, m, META_STATEMENT, r);
     return r;
   }
 
