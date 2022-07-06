@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.voml.rainbow_intellij.language.psi.*;
 import com.github.voml.rainbow_intellij.language.ast.RainAstExtension;
 
-public class RainLanguageInheritNode extends ASTWrapperPsiElement implements RainLanguageInherit {
+public class RainInheritNode extends ASTWrapperPsiElement implements RainInherit {
 
-  public RainLanguageInheritNode(@NotNull ASTNode node) {
+  public RainInheritNode(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull RainVisitor visitor) {
-    visitor.visitLanguageInherit(this);
+    visitor.visitInherit(this);
   }
 
   @Override

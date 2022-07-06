@@ -14,9 +14,21 @@ abstract class MixinField(node: ASTNode) : DeclareNode(node),
     override fun getNameIdentifier(): RainKey {
         return this.key
     }
-    override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Gutter.OverridingMethod, "${nameIdentifier.text}:", value.text)
+
+    override fun getPresentation(): ItemPresentation = when {
+        this.array != null -> {
+            RbItemPresentation(
+                AllIcons.Gutter.OverridingMethod,
+                "${nameIdentifier.text}:",
+                this.array!!.firstChild.text
+            )
+        }
+        else -> {
+            RbItemPresentation(AllIcons.Gutter.OverridingMethod, nameIdentifier.text)
+        }
     }
+
+
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
     }

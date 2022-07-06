@@ -21,20 +21,17 @@ class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
         highlight(o.identifier, RainbowColor.KEYWORD)
     }
 
-    override fun visitGlobalStatement(o: RainGlobalStatement) {
-        highlight(o.keyword, RainbowColor.KEYWORD)
-    }
 
-    override fun visitAttributeStatement(o: RainAttributeStatement) {
-        when (o.key.text) {
-            "default" -> {
-                highlight(o.key, RainbowColor.KEYWORD)
-            }
-            else -> {
-                highlight(o.key, RainbowColor.SYM_ATTRIBUTE)
-            }
-        }
-    }
+//    override fun visitAttributeStatement(o: RainAttributeStatement) {
+//        when (o.key.text) {
+//            "default" -> {
+//                highlight(o.key, RainbowColor.KEYWORD)
+//            }
+//            else -> {
+//                highlight(o.key, RainbowColor.SYM_ATTRIBUTE)
+//            }
+//        }
+//    }
 
     override fun visitFieldStatement(o: RainFieldStatement) {
         highlight(o.key, RainbowColor.SYM_FIELD)
@@ -45,7 +42,7 @@ class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
         highlight(o.identifier, RainbowColor.SYM_LANGUAGE)
     }
 
-    override fun visitLanguageInherit(o: RainLanguageInherit) {
+    override fun visitInherit(o: RainInherit) {
         highlight(o.identifier, RainbowColor.SYM_LANGUAGE)
     }
 

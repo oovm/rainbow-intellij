@@ -11,10 +11,6 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitAttributeStatement(@NotNull RainAttributeStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitBraceBlock(@NotNull RainBraceBlock o) {
     visitPsiElement(o);
   }
@@ -31,19 +27,15 @@ public class RainVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitGlobalStatement(@NotNull RainGlobalStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitIdentifier(@NotNull RainIdentifier o) {
     visitPsiElement(o);
   }
 
-  public void visitKey(@NotNull RainKey o) {
+  public void visitInherit(@NotNull RainInherit o) {
     visitPsiElement(o);
   }
 
-  public void visitLanguageInherit(@NotNull RainLanguageInherit o) {
+  public void visitKey(@NotNull RainKey o) {
     visitPsiElement(o);
   }
 

@@ -9,15 +9,13 @@ import com.github.voml.rainbow_intellij.language.psi_node.*;
 public interface RbToken {
 
   IElementType ARRAY = new RbElementType("ARRAY");
-  IElementType ATTRIBUTE_STATEMENT = new RbElementType("ATTRIBUTE_STATEMENT");
   IElementType BRACE_BLOCK = new RbElementType("BRACE_BLOCK");
   IElementType BRACKET_BLOCK = new RbElementType("BRACKET_BLOCK");
   IElementType COLOR_LITERAL = new RbElementType("COLOR_LITERAL");
   IElementType FIELD_STATEMENT = new RbElementType("FIELD_STATEMENT");
-  IElementType GLOBAL_STATEMENT = new RbElementType("GLOBAL_STATEMENT");
   IElementType IDENTIFIER = new RbElementType("IDENTIFIER");
+  IElementType INHERIT = new RbElementType("INHERIT");
   IElementType KEY = new RbElementType("KEY");
-  IElementType LANGUAGE_INHERIT = new RbElementType("LANGUAGE_INHERIT");
   IElementType LANGUAGE_STATEMENT = new RbElementType("LANGUAGE_STATEMENT");
   IElementType LITERAL = new RbElementType("LITERAL");
   IElementType META_STATEMENT = new RbElementType("META_STATEMENT");
@@ -63,9 +61,6 @@ public interface RbToken {
       if (type == ARRAY) {
         return new RainArrayNode(node);
       }
-      else if (type == ATTRIBUTE_STATEMENT) {
-        return new RainAttributeStatementNode(node);
-      }
       else if (type == BRACE_BLOCK) {
         return new RainBraceBlockNode(node);
       }
@@ -78,17 +73,14 @@ public interface RbToken {
       else if (type == FIELD_STATEMENT) {
         return new RainFieldStatementNode(node);
       }
-      else if (type == GLOBAL_STATEMENT) {
-        return new RainGlobalStatementNode(node);
-      }
       else if (type == IDENTIFIER) {
         return new RainIdentifierNode(node);
       }
+      else if (type == INHERIT) {
+        return new RainInheritNode(node);
+      }
       else if (type == KEY) {
         return new RainKeyNode(node);
-      }
-      else if (type == LANGUAGE_INHERIT) {
-        return new RainLanguageInheritNode(node);
       }
       else if (type == LANGUAGE_STATEMENT) {
         return new RainLanguageStatementNode(node);

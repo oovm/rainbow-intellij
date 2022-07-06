@@ -1,6 +1,5 @@
 package com.github.voml.rainbow_intellij.language.ast
 
-import com.github.voml.rainbow_intellij.language.psi.RainGlobalStatement
 import com.github.voml.rainbow_intellij.language.psi.RainIdentifier
 import com.github.voml.rainbow_intellij.language.psi.RainLanguageStatement
 import com.github.voml.rainbow_intellij.language.psi.RainMetaStatement
@@ -19,10 +18,6 @@ class RainAstExtension {
             return RainIdentifierNode(node.firstChild.node)
         }
 
-        @JvmStatic
-        fun getKeyword(node: RainGlobalStatement): RainIdentifier {
-            return RainIdentifierNode(node.firstChild.node)
-        }
         @JvmStatic
         fun getKeyword(node: RainLanguageStatement): RainIdentifier {
             return RainIdentifierNode(node.firstChild.node)

@@ -29,15 +29,21 @@ public class RainFieldStatementNode extends MixinField implements RainFieldState
   }
 
   @Override
+  @Nullable
+  public RainArray getArray() {
+    return findChildByClass(RainArray.class);
+  }
+
+  @Override
   @NotNull
   public RainKey getKey() {
     return findNotNullChildByClass(RainKey.class);
   }
 
   @Override
-  @NotNull
-  public RainValue getValue() {
-    return findNotNullChildByClass(RainValue.class);
+  @Nullable
+  public RainObjectInherit getObjectInherit() {
+    return findChildByClass(RainObjectInherit.class);
   }
 
 }

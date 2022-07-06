@@ -14,7 +14,7 @@ public interface RainLanguageStatement extends PsiElement {
   RainIdentifier getIdentifier();
 
   @Nullable
-  RainLanguageInherit getLanguageInherit();
+  RainInherit getInherit();
 
   @NotNull
   RainIdentifier getKeyword();

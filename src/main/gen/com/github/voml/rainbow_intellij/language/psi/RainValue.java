@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface RainValue extends PsiElement {
 
   @Nullable
-  RainArray getArray();
-
-  @Nullable
   RainColorLiteral getColorLiteral();
 
   @Nullable

@@ -42,8 +42,8 @@ public class RainLanguageStatementNode extends MixinLanguage implements RainLang
 
   @Override
   @Nullable
-  public RainLanguageInherit getLanguageInherit() {
-    return findChildByClass(RainLanguageInherit.class);
+  public RainInherit getInherit() {
+    return findChildByClass(RainInherit.class);
   }
 
   @Override

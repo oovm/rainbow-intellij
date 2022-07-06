@@ -30,8 +30,8 @@ public class RainArrayNode extends ASTWrapperPsiElement implements RainArray {
 
   @Override
   @NotNull
-  public RainBracketBlock getBracketBlock() {
-    return findNotNullChildByClass(RainBracketBlock.class);
+  public List<RainValue> getValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, RainValue.class);
   }
 
 }

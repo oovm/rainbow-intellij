@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface RainArray extends PsiElement {
 
   @NotNull
-  RainBracketBlock getBracketBlock();
+  List<RainValue> getValueList();
 
 }

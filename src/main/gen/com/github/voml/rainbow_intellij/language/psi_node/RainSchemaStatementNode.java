@@ -41,6 +41,12 @@ public class RainSchemaStatementNode extends MixinSchema implements RainSchemaSt
   }
 
   @Override
+  @Nullable
+  public RainInherit getInherit() {
+    return findChildByClass(RainInherit.class);
+  }
+
+  @Override
   @NotNull
   public RainIdentifier getKeyword() {
     return RainAstExtension.getKeyword(this);

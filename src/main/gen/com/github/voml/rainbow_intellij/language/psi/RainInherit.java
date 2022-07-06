@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface RainAttributeStatement extends PsiElement {
+public interface RainInherit extends PsiElement {
 
   @NotNull
-  RainKey getKey();
-
-  @Nullable
-  RainObjectInherit getObjectInherit();
-
-  @NotNull
-  List<RainValue> getValueList();
+  RainIdentifier getIdentifier();
 
 }

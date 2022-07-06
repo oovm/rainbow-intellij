@@ -7,10 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface RainFieldStatement extends PsiElement {
 
+  @Nullable
+  RainArray getArray();
+
   @NotNull
   RainKey getKey();
 
-  @NotNull
-  RainValue getValue();
+  @Nullable
+  RainObjectInherit getObjectInherit();
 
 }
