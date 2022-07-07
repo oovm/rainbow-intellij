@@ -10,7 +10,11 @@ import java.awt.Color
 
 class RbElementColorProvider : ElementColorProvider {
     override fun getColorFrom(element: PsiElement): Color? = when (element.elementType) {
-        RbToken.COLOR -> ColorUtil.fromHex(element.text)
+        RbToken.COLOR -> try {
+            ColorUtil.fromHex(element.text)
+        } catch (e: Exception) {
+            null
+        }
         else -> null
     }
 

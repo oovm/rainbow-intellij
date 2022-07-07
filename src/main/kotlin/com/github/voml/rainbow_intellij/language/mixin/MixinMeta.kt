@@ -9,6 +9,7 @@ import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.PsiElement
+import javax.swing.Icon
 
 abstract class MixinMeta(node: ASTNode) : DeclareNode(node),
     RainMetaStatement {
@@ -16,9 +17,7 @@ abstract class MixinMeta(node: ASTNode) : DeclareNode(node),
         return this.identifier
     }
 
-    override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Nodes.ClassInitializer, "@MetaInfo")
-    }
+    override fun getIcon(flags: Int): Icon = AllIcons.Nodes.ClassInitializer
 
     override fun setName(name: String): PsiElement {
         // TODO: check duplicate name

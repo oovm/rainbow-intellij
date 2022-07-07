@@ -8,6 +8,7 @@ import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.PsiElement
+import javax.swing.Icon
 
 abstract class MixinLanguage(node: ASTNode) : DeclareNode(node),
     RainLanguageStatement {
@@ -15,10 +16,7 @@ abstract class MixinLanguage(node: ASTNode) : DeclareNode(node),
         return this.identifier.firstChild
     }
 
-
-    override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.FileTypes.AddAny, nameIdentifier.text)
-    }
+    override fun getIcon(flags: Int): Icon = AllIcons.FileTypes.AddAny
 
     override fun setName(name: String): PsiElement {
         // TODO: check duplicate name

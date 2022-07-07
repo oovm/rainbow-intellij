@@ -9,12 +9,12 @@ import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
 import com.intellij.psi.PsiElement
+import javax.swing.Icon
 
 abstract class MixinField(node: ASTNode) : DeclareNode(node),
     RainFieldStatement {
-    override fun getNameIdentifier(): RainKey {
-        return this.key
-    }
+    override fun getNameIdentifier(): RainKey = this.key
+    override fun getIcon(flags: Int): Icon = AllIcons.Gutter.OverridingMethod;
 
     override fun getPresentation(): ItemPresentation = when {
         this.array != null -> {
