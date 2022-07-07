@@ -20,7 +20,7 @@ abstract class DeclareNode(node: ASTNode) : ASTWrapperPsiElement(node),
     override fun getName(): String = nameIdentifier.text
 
     override fun getPresentation(): ItemPresentation {
-        return RbItemPresentation(AllIcons.Nodes.ClassInitializer, name)
+        return RbItemPresentation(this.getIcon(0), name)
     }
     override fun getTextOffset(): Int {
         return nameIdentifier.textOffset

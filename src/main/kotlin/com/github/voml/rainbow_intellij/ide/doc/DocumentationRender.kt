@@ -48,16 +48,26 @@ class DocumentationRender(var element: PsiElement, private var original: PsiElem
     private fun buildDetail(element: RainLanguageStatementNode) {
         buildShort(element)
         // defines
-        append(KEYWORD, "defines")
-        appendNewline()
-        element.fields.forEach {
-            append("&nbsp;&nbsp;&nbsp;&nbsp;")
-            append(SYM_ATTRIBUTE, it.name)
+        if (element.fields.isNotEmpty()) {
+            append(KEYWORD, "defines")
             appendNewline()
+            element.fields.forEach {
+                append("&nbsp;&nbsp;&nbsp;&nbsp;")
+                append(SYM_ATTRIBUTE, it.name)
+                appendNewline()
+            }
         }
         // inherits
-        append(KEYWORD, "inherits")
-        appendNewline()
+        val file = element.containingFile as RainbowFile
+        file.getGlobalStatements()?.let { global ->
+            append(KEYWORD, "inherits")
+            appendNewline()
+            global.fields.forEach {
+                append("&nbsp;&nbsp;&nbsp;&nbsp;")
+                append(SYM_ATTRIBUTE, it.name)
+                appendNewline()
+            }
+        }
     }
 
     /// get the path relative to the project root
@@ -74,11 +84,15 @@ class DocumentationRender(var element: PsiElement, private var original: PsiElem
     }
 
     private fun append(key: RainbowColor, text: String) {
+        doc.append(render(key, text))
+    }
+    private fun render(key: RainbowColor, text: String): String {
         // HtmlSyntaxInfoUtil.getStyledSpan(key.textAttributesKey, text, 1.0f)
         val attr = EditorColorsManager.getInstance().globalScheme.getAttributes(key.textAttributesKey)
         val color = ColorUtil.toHtmlColor(attr.foregroundColor)
-        doc.append("<span style='color:${color}'>${text}</span>")
+        return "<span style='color:${color}'>${text}</span>"
     }
+
 
     private fun appendHighlight(code: String) {
         HtmlSyntaxInfoUtil.appendHighlightedByLexerAndEncodedAsHtmlCodeSnippet(

@@ -40,4 +40,10 @@ public class RainMetaStatementNode extends MixinMeta implements RainMetaStatemen
     return findNotNullChildByClass(RainIdentifier.class);
   }
 
+  @Override
+  @NotNull
+  public List<? extends RainFieldStatementNode> getFields() {
+    return RainAstExtension.getFields(this);
+  }
+
 }

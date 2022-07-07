@@ -26,5 +26,13 @@ class RainAstExtension {
                 else -> PsiTreeUtil.getChildrenOfTypeAsList(node.braceBlock, RainFieldStatementNode::class.java)
             }
         }
+
+        @JvmStatic
+        fun getFields(node: RainMetaStatement?): MutableList<out RainFieldStatementNode> {
+            return when (node) {
+                null -> mutableListOf()
+                else -> PsiTreeUtil.getChildrenOfTypeAsList(node.braceBlock, RainFieldStatementNode::class.java)
+            }
+        }
     }
 }

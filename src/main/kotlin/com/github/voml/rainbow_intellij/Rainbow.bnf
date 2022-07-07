@@ -71,6 +71,7 @@ schema_statement ::= "schema" identifier [COLON inherit] <<brace_block field_sta
 // ---------------------------------------------------------------------------------------------------------------------
 meta_statement ::= identifier <<brace_block field_statement ignore>> {
     mixin = "com.github.voml.rainbow_intellij.language.mixin.MixinMeta"
+    methods = [getFields]
 };
 // ---------------------------------------------------------------------------------------------------------------------
 language_statement ::= "language" identifier [COLON inherit] <<brace_block field_statement ignore>> {

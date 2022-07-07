@@ -29,7 +29,6 @@ abstract class MixinField(node: ASTNode) : DeclareNode(node),
         }
     }
 
-
     override fun setName(name: String): PsiElement {
         TODO("Not yet implemented")
     }

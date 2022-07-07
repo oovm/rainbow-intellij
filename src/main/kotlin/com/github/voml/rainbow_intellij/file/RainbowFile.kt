@@ -20,6 +20,14 @@ class RainbowFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, Ra
             .firstOrNull()
     }
 
+    fun getGlobalStatements(): RainMetaStatementNode? {
+        return PsiTreeUtil
+            .getChildrenOfAnyType(this, RainMetaStatementNode::class.java)
+            .firstOrNull {
+                it.identifier.text == "global"
+            }
+    }
+
     fun getLanguageStatements(): MutableMap<String, RainLanguageStatementNode> {
         val map = mutableMapOf<String, RainLanguageStatementNode>()
         PsiTreeUtil
