@@ -21,6 +21,11 @@ class RbNodeFactory(private var project: Project) {
         return PsiTreeUtil.findChildOfType(file, RainColorLiteral::class.java)!!.firstChild
     }
 
+    fun createSchemaID(id: String): RainIdentifierNode {
+        val file = createFile("schema $id{}")
+        return PsiTreeUtil.findChildOfType(file, RainIdentifierNode::class.java)!!
+    }
+
     fun createMetaID(id: String): RainIdentifierNode {
         val file = createFile("$id{}")
         return PsiTreeUtil.findChildOfType(file, RainIdentifierNode::class.java)!!

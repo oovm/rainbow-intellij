@@ -22,6 +22,5 @@ class RainAstExtension {
         fun getKeyword(node: RainLanguageStatement): RainIdentifier {
             return RainIdentifierNode(node.firstChild.node)
         }
-
     }
 }
