@@ -6,7 +6,9 @@ import com.github.voml.rainbow_intellij.language.psi.RainLanguageStatement
 import com.github.voml.rainbow_intellij.language.psi.RbNodeFactory
 import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
+import com.intellij.lang.documentation.psi.PsiDocumentationTargetFactory
 import com.intellij.navigation.ItemPresentation
+import com.intellij.psi.PsiDocCommentBase
 import com.intellij.psi.PsiElement
 import javax.swing.Icon
 

@@ -1,10 +1,11 @@
 package com.github.voml.rainbow_intellij.language.ast
 
-import com.github.voml.rainbow_intellij.language.psi.RainIdentifier
-import com.github.voml.rainbow_intellij.language.psi.RainLanguageStatement
-import com.github.voml.rainbow_intellij.language.psi.RainMetaStatement
-import com.github.voml.rainbow_intellij.language.psi.RainSchemaStatement
+import com.github.voml.rainbow_intellij.language.psi.*
+import com.github.voml.rainbow_intellij.language.psi_node.RainFieldStatementNode
 import com.github.voml.rainbow_intellij.language.psi_node.RainIdentifierNode
+import com.github.voml.rainbow_intellij.language.psi_node.RainLanguageStatementNode
+import com.intellij.codeInsight.lookup.LookupElementBuilder
+import com.intellij.psi.util.PsiTreeUtil
 
 class RainAstExtension {
     companion object {
@@ -14,13 +15,16 @@ class RainAstExtension {
         }
 
         @JvmStatic
-        fun getKeyword(node: RainMetaStatement): RainIdentifier {
+        fun getKeyword(node: RainLanguageStatement): RainIdentifier {
             return RainIdentifierNode(node.firstChild.node)
         }
 
         @JvmStatic
-        fun getKeyword(node: RainLanguageStatement): RainIdentifier {
-            return RainIdentifierNode(node.firstChild.node)
+        fun getFields(node: RainLanguageStatement?): MutableList<out RainFieldStatementNode> {
+            return when (node) {
+                null -> mutableListOf()
+                else -> PsiTreeUtil.getChildrenOfTypeAsList(node.braceBlock, RainFieldStatementNode::class.java)
+            }
         }
     }
 }

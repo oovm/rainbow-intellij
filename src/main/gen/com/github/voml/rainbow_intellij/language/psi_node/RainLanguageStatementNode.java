@@ -52,4 +52,10 @@ public class RainLanguageStatementNode extends MixinLanguage implements RainLang
     return RainAstExtension.getKeyword(this);
   }
 
+  @Override
+  @NotNull
+  public List<? extends RainFieldStatementNode> getFields() {
+    return RainAstExtension.getFields(this);
+  }
+
 }

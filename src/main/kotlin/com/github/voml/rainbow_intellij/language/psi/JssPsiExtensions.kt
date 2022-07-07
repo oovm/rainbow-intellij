@@ -102,21 +102,6 @@ inline fun <reified T : PsiElement> PsiElement.contextStrict(): T? =
 inline fun <reified T : PsiElement> PsiElement.contextOrSelf(): T? =
     PsiTreeUtil.getContextOfType(this, T::class.java, /* strict */ false)
 
-
-inline fun <reified T : PsiElement> PsiElement.childOfType(): T? =
-    PsiTreeUtil.getChildOfType(this, T::class.java)
-
-inline fun <reified T : PsiElement> PsiElement.childrenOfType(): List<T> =
-    PsiTreeUtil.getChildrenOfTypeAsList(this, T::class.java)
-
-inline fun <reified T : PsiElement> PsiElement.stubChildrenOfType(): List<T> {
-    return if (this is PsiFileImpl) {
-        stub?.childrenStubs?.mapNotNull { it.psi as? T } ?: return childrenOfType()
-    } else {
-        PsiTreeUtil.getStubChildrenOfTypeAsList(this, T::class.java)
-    }
-}
-
 /** Finds first sibling that is neither comment, nor whitespace before given element */
 fun PsiElement?.getPrevNonCommentSibling(): PsiElement? =
     PsiTreeUtil.skipWhitespacesAndCommentsBackward(this)
