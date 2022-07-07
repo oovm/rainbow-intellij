@@ -4,6 +4,7 @@ import com.github.voml.rainbow_intellij.ide.view.RbItemPresentation
 import com.github.voml.rainbow_intellij.language.ast.DeclareNode
 import com.github.voml.rainbow_intellij.language.psi.RainFieldStatement
 import com.github.voml.rainbow_intellij.language.psi.RainKey
+import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation

@@ -2,7 +2,7 @@ package com.github.voml.rainbow_intellij.ide.formatter
 
 import com.intellij.lang.Commenter
 
-class JssCommenter : Commenter {
+class RbCommenter : Commenter {
     override fun getLineCommentPrefix(): String = "//"
 
     override fun getBlockCommentPrefix(): String = "/*"

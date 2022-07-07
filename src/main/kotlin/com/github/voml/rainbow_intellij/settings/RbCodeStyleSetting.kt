@@ -1,10 +1,11 @@
-package com.github.voml.rainbow_intellij.ide.codeStyle
+package com.github.voml.rainbow_intellij.settings
 
 import com.github.voml.rainbow_intellij.file.RainbowLanguage
+import com.github.voml.rainbow_intellij.ide.codeStyle.RbCodeStyleConfigurable
 import com.intellij.application.options.SmartIndentOptionsEditor
 import com.intellij.psi.codeStyle.*
 
-class RbLanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsProvider() {
+class RbCodeStyleSetting : LanguageCodeStyleSettingsProvider() {
     override fun getLanguage() = RainbowLanguage.INSTANCE
 
     override fun getIndentOptionsEditor() = SmartIndentOptionsEditor()
@@ -109,4 +110,3 @@ v = [
         const val DEFAULT_RIGHT_MARGIN = 100
     }
 }
-

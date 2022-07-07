@@ -1,7 +1,7 @@
 package com.github.voml.rainbow_intellij.ast
 
-import com.github.voml.rainbow_intellij.ide.formatter.JssFormatterContext
-import com.github.voml.rainbow_intellij.ide.formatter.JssFormattingModelBuilder
+import com.github.voml.rainbow_intellij.ide.formatter.RbFormatterContext
+import com.github.voml.rainbow_intellij.ide.formatter.RbFormattingModelBuilder
 import com.github.voml.rainbow_intellij.language.psi.RbToken
 
 import com.intellij.formatting.Block
@@ -29,7 +29,7 @@ fun RainAstBlock.buildChildren(): List<Block> {
     return node.getChildren(null)
         .filter { !it.isWhitespaceOrEmpty() }
         .map { childNode ->
-            JssFormattingModelBuilder.createBlock(
+            RbFormattingModelBuilder.createBlock(
                 node = childNode,
                 alignment = null,
                 indent = computeIndent(childNode),
@@ -43,6 +43,6 @@ private fun ASTNode?.isWhitespaceOrEmpty(): Boolean {
     return this == null || textLength == 0 || elementType == TokenType.WHITE_SPACE
 }
 
-fun Block.computeSpacing(child1: Block?, child2: Block, ctx: JssFormatterContext): Spacing? {
+fun Block.computeSpacing(child1: Block?, child2: Block, ctx: RbFormatterContext): Spacing? {
     return ctx.spacingBuilder.getSpacing(this, child1, child2)
 }

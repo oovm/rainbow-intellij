@@ -15,31 +15,40 @@ class RbNodeHighlighter : RbRecursiveVisitor(), HighlightVisitor {
     override fun visitSchemaStatement(o: RainSchemaStatement) {
         highlight(o.keyword, RainbowColor.KEYWORD)
         highlight(o.identifier, RainbowColor.SYM_SCHEMA)
+        o.inherit?.let {
+            highlight(it.identifier, RainbowColor.SYM_SCHEMA)
+        }
     }
 
     override fun visitMetaStatement(o: RainMetaStatement) {
         highlight(o.identifier, RainbowColor.KEYWORD)
-    }
+        when (o.identifier.text) {
+            "global" -> {
+                o.braceBlock.children.forEach {
+                    if (it is RainFieldStatement) {
+                        highlight(it.key, RainbowColor.SYM_ATTRIBUTE)
+                    }
+                }
+            }
+            else -> {
+                o.braceBlock.children.forEach {
+                    if (it is RainFieldStatement) {
+                        highlight(it.key, RainbowColor.SYM_FIELD)
+                    }
+                }
+            }
+        }
 
-
-//    override fun visitAttributeStatement(o: RainAttributeStatement) {
-//        when (o.key.text) {
-//            "default" -> {
-//                highlight(o.key, RainbowColor.KEYWORD)
-//            }
-//            else -> {
-//                highlight(o.key, RainbowColor.SYM_ATTRIBUTE)
-//            }
-//        }
-//    }
-
-    override fun visitFieldStatement(o: RainFieldStatement) {
-        highlight(o.key, RainbowColor.SYM_FIELD)
     }
 
     override fun visitLanguageStatement(o: RainLanguageStatement) {
         highlight(o.keyword, RainbowColor.KEYWORD)
         highlight(o.identifier, RainbowColor.SYM_LANGUAGE)
+        o.braceBlock.children.forEach {
+            if (it is RainFieldStatement) {
+                highlight(it.key, RainbowColor.SYM_ATTRIBUTE)
+            }
+        }
     }
 
     override fun visitInherit(o: RainInherit) {

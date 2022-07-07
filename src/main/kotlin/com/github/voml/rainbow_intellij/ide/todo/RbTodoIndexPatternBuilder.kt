@@ -9,7 +9,7 @@ import com.intellij.psi.impl.search.IndexPatternBuilder
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 
-class VomlTodoIndexPatternBuilder : IndexPatternBuilder {
+class RbTodoIndexPatternBuilder : IndexPatternBuilder {
     override fun getIndexingLexer(file: PsiFile): Lexer? {
         return if (file is RainbowFile) RbLexerAdapter() else null
     }

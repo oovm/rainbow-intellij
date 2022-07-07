@@ -1,6 +1,5 @@
 package com.github.voml.rainbow_intellij.ide.formatter
 
-import com.github.voml.rainbow_intellij.language.psi.endOffset
 import com.github.voml.rainbow_intellij.language.psi.getNextNonCommentSibling
 import com.github.voml.rainbow_intellij.language.psi.getPrevNonCommentSibling
 import com.github.voml.rainbow_intellij.language.psi.getPrevNonWhitespaceSibling
@@ -11,15 +10,15 @@ import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 
-class JssCommaFixer : SmartEnterProcessorWithFixers.Fixer<JssSmartEnter>() {
-    override fun apply(editor: Editor, processor: JssSmartEnter, element: PsiElement) {
+class RbCommaFixer : SmartEnterProcessorWithFixers.Fixer<RbSmartEnter>() {
+    override fun apply(editor: Editor, processor: RbSmartEnter, element: PsiElement) {
         element.isValid
         val current = if (element is LeafPsiElement && element.parent !is PsiFile) {
             element.parent
         } else {
             element
         }
-        var errorElement: PsiErrorElement? = getFirstErrorAround(current)
+        val errorElement: PsiErrorElement? = getFirstErrorAround(current)
         if (errorElement != null) {
             val description = errorElement.errorDescription
             val expectedId = description.indexOf("expected")
@@ -28,7 +27,7 @@ class JssCommaFixer : SmartEnterProcessorWithFixers.Fixer<JssSmartEnter>() {
 
             val siblingOnLeft = errorElement.getPrevNonCommentSibling()
             if (siblingOnLeft != null && commaIsExpected) {
-                editor.document.insertString(siblingOnLeft.endOffset, ",")
+                editor.document.insertString(siblingOnLeft.textRange.endOffset, ",")
             }
         }
     }

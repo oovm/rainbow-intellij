@@ -1,6 +1,6 @@
 package com.github.voml.rainbow_intellij.ast
 
-import com.github.voml.rainbow_intellij.ide.formatter.JssFormatterContext
+import com.github.voml.rainbow_intellij.ide.formatter.RbFormatterContext
 import com.github.voml.rainbow_intellij.language.psi.RbToken
 import com.intellij.formatting.*
 import com.intellij.lang.ASTNode
@@ -13,7 +13,7 @@ class RainAstBlock(
     private val alignment: Alignment?,
     private val indent: Indent?,
     private val wrap: Wrap?,
-    val ctx: JssFormatterContext,
+    val ctx: RbFormatterContext,
 ) : ASTBlock {
     override fun isLeaf(): Boolean = node.firstChildNode == null
 

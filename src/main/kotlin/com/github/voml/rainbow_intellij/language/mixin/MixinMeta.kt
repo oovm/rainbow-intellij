@@ -4,6 +4,7 @@ import com.github.voml.rainbow_intellij.ide.view.RbItemPresentation
 import com.github.voml.rainbow_intellij.language.ast.DeclareNode
 import com.github.voml.rainbow_intellij.language.psi.RainIdentifier
 import com.github.voml.rainbow_intellij.language.psi.RainMetaStatement
+import com.github.voml.rainbow_intellij.language.psi.RbNodeFactory
 import com.intellij.icons.AllIcons
 import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
@@ -20,6 +21,8 @@ abstract class MixinMeta(node: ASTNode) : DeclareNode(node),
     }
 
     override fun setName(name: String): PsiElement {
-        TODO("Can't set name")
+        // TODO: check duplicate name
+        this.identifier.replace(RbNodeFactory(this.project).createMetaID(name))
+        return this.identifier
     }
 }

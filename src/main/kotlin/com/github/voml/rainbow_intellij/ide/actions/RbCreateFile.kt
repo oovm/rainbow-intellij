@@ -7,7 +7,7 @@ import com.intellij.ide.actions.CreateFileFromTemplateDialog.*
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiDirectory
 
-class JssCreateFile :
+class RbCreateFile :
     CreateFileFromTemplateAction(name, description, RainbowIcons.RmbFile) {
     companion object {
         private val name = RainbowBundle.message("action.create_file")

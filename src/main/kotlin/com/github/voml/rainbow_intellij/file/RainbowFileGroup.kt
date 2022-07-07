@@ -5,10 +5,9 @@ import org.jetbrains.annotations.NotNull
 
 class RainbowFileGroup : ProjectViewNestingRulesProvider {
     override fun addFileNestingRules(@NotNull consumer: ProjectViewNestingRulesProvider.Consumer) {
-//        consumer.addNestingRule(".jss", ".json")
-//        consumer.addNestingRule(".jss", ".json5")
+        consumer.addNestingRule(".rml", ".html")
+        consumer.addNestingRule(".rml", ".tex")
 //        consumer.addNestingRule(".jss", ".yaml")
 //        consumer.addNestingRule(".jss", ".toml")
     }
-
 }
